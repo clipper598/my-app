@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lector de Código de Barras</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+  <style>
+    body {
+        background-color: #fcf4dd;
+        font-family: Helvetica, Arial, sans-serif;
+    }
+    .titulos {
+        font-size: 25px;
+        text-align: center;
+        color: #004a77ff;
+        font-weight: bold;
+    }
+
+    .data {
+        font-size: 23px;
+        text-align: left;
+        color: #000000;
+    }
+
+    .buttonTitle{
+        font-size: 23px;
+    }
+
+</style>
+  <body>
+    <br /><br />
+    <div class="panel panel-info panelGris col-sm-12">
+        <br />
+        <div class="panel-heading">
+            <h1>Titas Toys / <i class="fa fa-arrow-up fa-lg" aria-hidden="true"></i> Alta de Productos - Inventario</h1> 
+        </div>
+     
+      <br /><br />
+      <div class="panel-body">
+    
+      <br />
+      <div class="panel panel-info col-sm-4">
+        <button id="start-camera" class="btn btn-info buttonTitle"><i class="fa fa-camera" aria-hidden="true"></i> &nbsp; Cámara</button>
+        <hr />
+        <button class="btn btn-danger" id="stop-camera" style="display: none;"><i class="fa fa-remove" aria-hidden="true"></i></button>
+        <!-- Contenedor para el video -->
+        <div id="camera-container" style="display: none;">
+          <h3>Acerca el código de barras</h3>
+          <div id="video-container" style="width: 40%; height: 200px;"></div>
+        </div>
+      </div>
+      <!-- Formulario para entrada de datos -->
+      <div class="panel panel-info panelGris col-sm-8">
+      <form action="/altaInventario" method="post">
+        <!-- Código de barras -->
+        <label for="barcode" class="titulos"><h3>Código de barras:</h3></label>
+        <input type="text"  class="form-control data" id="barcode" name="barcode" autofocus required value=""/>
+        <br /><br />
+
+        <!-- Nombre del producto -->
+        <label for="product-name" class="titulos"><h3>Nombre del producto:</h3></label>
+        <input type="text" class="form-control data"  id="product-name" name="productName" required value=""/>
+        <br /><br />
+
+        <!-- Cantidad con spinner -->
+        <label for="quantity" class="titulos"><h3>Cantidad:</h3></label>
+        <input type="number" class="form-control data" id="quantity" name="quantity" min="1" value="1" required value=""/>
+        <br /><br />
+
+        <!-- Precio -->
+        <label for="price" class="titulos"><h3>Precio: $</h3></label>
+        <input type="text" class="form-control data" id="price" name="price" required value=""/>
+        <br /><br />
+
+        <!-- Botón para enviar -->
+        <button type="submit" class="btn btn-success buttonTitle"> 
+            <i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Alta</button>
+      </form>
+      <br /><br />
+    </div>
+    
+    </div>
+    </div>
+    <script>
+      $(document).ready(function () {
+        let isCameraActive = false
+      
+        // Iniciar la cámara
+        $('#start-camera').on('click', function () {
+          if (!isCameraActive) {
+            isCameraActive = true
+            $('#camera-container').show()
+            $('#stop-camera').show()
+            $(this).hide()
+      
+            // Configurar QuaggaJS
+            Quagga.init(
+              {
+                inputStream: {
+                  name: 'Live',
+                  type: 'LiveStream',
+                  target: document.querySelector('#video-container') // Contenedor del video
+                },
+                decoder: {
+                  readers: ['code_128_reader', 'ean_reader', 'ean_8_reader'] // Tipos de códigos de barras
+                }
+              },
+              function (err) {
+                if (err) {
+                  console.error(err)
+                  alert('Error al iniciar la cámara.')
+                  return
+                }
+                Quagga.start()
+              }
+            )
+      
+            // Detectar códigos de barras
+            Quagga.onDetected(function (data) {
+              const barcode = data.codeResult.code
+              $('#scanned-barcode').text(barcode) // Mostrar el código escaneado
+              $('#barcode').val(barcode) // Rellenar el campo de entrada
+              Quagga.stop() // Detener la cámara después de escanear
+              $('#camera-container').hide()
+              $('#stop-camera').hide()
+              $('#start-camera').show()
+              isCameraActive = false
+            })
+          }
+        })
+      
+        // Detener la cámara
+        $('#stop-camera').on('click', function () {
+          if (isCameraActive) {
+            Quagga.stop()
+            $('#camera-container').hide()
+            $('#stop-camera').hide()
+            $('#start-camera').show()
+            isCameraActive = false
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

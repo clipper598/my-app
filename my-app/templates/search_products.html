@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lector de Código de Barras</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+  <style>
+    body {
+        background-color: #fcf4dd;
+        font-family: Helvetica, Arial, sans-serif;
+    }
+    .titulos {
+        font-size: 25px;
+        text-align: center;
+        color: #004a77ff;
+        font-weight: bold;
+    }
+
+    .labelTd{
+      font-size: 20px;
+      text-align: left;
+      color: #000;
+  }
+
+  .labelButtonsMenu{
+    font-size: 28px;
+    text-align: left;
+    color: #fff;
+}
+
+    .data {
+        font-size: 23px;
+        text-align: left;
+        color: #000000;
+    }
+
+    .buttonTitle{
+        font-size: 23px;
+    }
+
+</style>
+  <body>
+    <br /><br />
+    <div class="panel panel-info panelGris col-sm-12">
+        <br />
+        <div class="panel-heading">
+            <h1>Titas Toys / <i class="fa fa-search fa-lg" aria-hidden="true"></i> Consulta de Productos - Inventario</h1> 
+        </div>
+      <br /><br />
+      <div class="panel-body">
+      <br />
+      <form action="" method="post">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <form action="/menu" method="POST">
+
+          <input type="hidden" name="menuAlta" id="menuAlta" value="0">
+          <button type="submit" class="btn btn-success buttonTitle" id="btnMenuAlta"><i class="fa fa-plus fa-2x"></i> 
+              <label class="titulos"> Alta de Productos</label>
+          </button>
+      </form>
+      </div>
+    </form>
+      <br /><br /><br />
+      <!-- Consulta de inventario -->
+      <div class="panel panel-info panelGris col-sm-8">
+        <table class="table table-bordered">
+          <thead>
+              <tr style="text-align: center;">
+                  <th><h3><label for="barcode" class="titulos"><h3>Código de barras</h3></label></th>
+                  <th><h3><label for="product-name" class="titulos"><h3>Nombre del producto</h3></label></th>
+                  <th><h3><label for="quantity" class="titulos"><h3>Cantidad</h3></label></th>
+                  <th><h3><label for="price" class="titulos"><h3>Precio Venta</h3></label></th>
+                  <th><h3><label for="price" class="titulos"><h3>Modificar</h3></th>
+                  <th><h3><label for="price" class="titulos"><h3>Borrar</h3></th>
+              </tr>
+          </thead>
+          <tbody class="labelTd">
+             {% for product in products%}
+             <tr>
+              <td>
+                {{product[1]}}
+              </td>
+              <td>
+                {{product[2]}}
+              </td>
+              <td style="text-align: center;">
+                {{product[3]}}
+              </td>
+              <td >
+                $&nbsp;{{product[4]}}
+              </td>
+              <td style="text-align: center;">
+               <button type="submit" class="btn btn-info" id="update-product"><i class="fa fa-pencil"></i></button>
+              </td>
+              <td style="text-align: center;">
+                <form action="/eliminaInventario" method="post">
+                  <input type="hidden" name="id" value="{{product[0]}}">
+                  <button  type="submit" class="btn btn-danger" id="delete-product"><i class="fa fa-remove"></i></button>
+                </form>
+            </tr>
+             {% endfor%}
+          </tbody>
+      </table>
+      <br /><br />
+    </div>
+    
+    </div>
+    </div>
+    <script>
+      $(document).ready(function() {
+          $('#btnMenuAlta').on('click', function() {
+              $(menuAlta).val(1); 
+          });
+      });
+  </script>
+  </body>
+</html>
