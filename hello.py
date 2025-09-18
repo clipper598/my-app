@@ -87,10 +87,13 @@ def hello():
     products = []
     conexion_MySQLdb = conectionDB()
         
-    with conexion_MySQLdb.cursor() as cursor:
-        cursor.execute("select id, barcode, product_name, quantity, price FROM products")
-        products = cursor.fetchall()     
+    cursor = conexion_MySQLdb.cursor()
+    try:
+        cursor.execute("SELECT id, barcode, product_name, quantity, price FROM products")
+        products = cursor.fetchall()
         print(products)
+    finally:
+        cursor.close()
     conexion_MySQLdb.close()
       
     return render_template('search_products.html', products = products);
