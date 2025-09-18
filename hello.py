@@ -91,10 +91,8 @@ def hello():
         cursor.execute("select id, barcode, product_name, quantity, price FROM products")
         products = cursor.fetchall()     
         print(products)
-    cursor.close();
     conexion_MySQLdb.close()
-    
-        
+      
     return render_template('search_products.html', products = products);
 
 #eliminaInventario  
