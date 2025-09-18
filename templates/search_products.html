@@ -86,12 +86,11 @@
 
   .btnNavegacion{
     background-color: #e733ad;
-    width: 300px;
+    width: 120px;
   }
 
   .btnMorado{
       background-color: #943D73;
-      width: 450px;
   }
 
   .imagen-redondeada {
@@ -128,14 +127,14 @@
         <br/><br/>
         <form action="/altaInventario" method="POST">
           <input type="hidden" name="menuAlta" id="menuAlta" value="0">
-          <button type="submit" class="btn btnMorado" id="btnMenuAlta"><i class="fa fa-plus fa-2x titulos"></i> 
+          <button type="submit" class="btn btnMorado btn-lg" id="btnMenuAlta"><i class="fa fa-plus fa-2x titulos"></i> 
               <label class="titulos"> Agregar producto</label>
           </button>
         </form>
       <br /><br /><br />
       <!-- Consulta de inventario -->
       <h2> Productos  </h2>
-      <div class="panel panel-info col-sm-8">
+      <div class="panel panel-info col-sm-12">
         <table class="table table-bordered" id="tblProducts">
           <thead style="text-align: center;">
               <tr class="headTr centrado">
