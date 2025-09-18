@@ -22,17 +22,20 @@ def index():
            return render_template('index.html');
         else:
             conexion_MySQLdb = conectionDB()
-            print(price);
-            print(product_name);
-            print(quantity);
-            with conexion_MySQLdb.cursor() as cursor:
-                cursor.execute("INSERT INTO products (barcode, product_name, quantity, price) VALUES( %s,  %s, %s, %s)", 
-                (barcode, product_name, quantity,price ))     
-        
-            conexion_MySQLdb.commit()
-            cursor.close()
-            conexion_MySQLdb.close()
-        
+            cursor = conexion_MySQLdb.cursor()
+            #print(price);
+            #print(product_name);
+            #print(quantity);
+            try:
+                cursor.execute(
+                    "INSERT INTO products (barcode, product_name, quantity, price) VALUES (%s, %s, %s, %s)", 
+                    (barcode, product_name, quantity, price)
+                )
+                conexion_MySQLdb.commit()
+            finally:
+                cursor.close()
+            
+        conexion_MySQLdb.close()
     return render_template('index.html');
 
 #actualizarInventario
@@ -64,14 +67,17 @@ def actualizarInventario():
             print(product_name);
             print(price);
             print(quantity);
-            
             conexion_MySQLdb = conectionDB()
-            with conexion_MySQLdb.cursor() as cursor:
-                cursor.execute("UPDATE products SET product_name = %s, quantity = %s, price = %s WHERE id = %s", 
-                (product_name, quantity, price, id))   
-            descAct = "Producto actualizado correctamente";
-            conexion_MySQLdb.commit()
-            cursor.close()
+            cursor = conexion_MySQLdb.cursor()
+            try:
+                cursor.execute(
+                    "UPDATE products SET product_name = %s, quantity = %s, price = %s WHERE id = %s",
+                    (product_name, quantity, price, id)
+                )
+                descAct = "Producto actualizado correctamente"
+                conexion_MySQLdb.commit()
+            finally:
+                cursor.close()
             conexion_MySQLdb.close()
             return render_template('edit_products.html', id = id, barcode = barcode, price = price, quantity = quantity, product_name = product_name, descAct=descAct);
                      
@@ -109,14 +115,21 @@ def eliminaInventario():
         # Validar que el id sea un entero válido
         if id and id.isdigit():
             id = int(id)
-            with conexion_MySQLdb.cursor() as cursor:
+            cursor = conexion_MySQLdb.cursor()
+            try:
                 cursor.execute("DELETE FROM products WHERE id = %s", (id,))
-            conexion_MySQLdb.commit()
-            with conexion_MySQLdb.cursor() as cursor:
-                cursor.execute("select id, barcode, product_name, quantity, price FROM products")
-                products = cursor.fetchall()     
+                conexion_MySQLdb.commit()
+            finally:
+                cursor.close()
+
+            cursor = conexion_MySQLdb.cursor()
+            try:
+                cursor.execute("SELECT id, barcode, product_name, quantity, price FROM products")
+                products = cursor.fetchall()
                 #print(products)
                 conexion_MySQLdb.commit()
+            finally:
+                cursor.close()
         else:
             print("Error: El id proporcionado no es válido.")
         cursor.close();
