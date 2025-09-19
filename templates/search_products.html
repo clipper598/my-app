@@ -33,10 +33,17 @@
     }
 
     .labelTd{
-      font-size: 22px;
+      font-size: 20px;
       text-align: left;
       color: #000;
   }
+
+  .labelTdMedium{
+    font-size: 18px;
+    text-align: left;
+    color: darkgray;
+    font-weight: bold;
+}
 
   .labelButtonsMenu{
     font-size: 28px;
@@ -125,21 +132,23 @@
         <br/><br/>
         <form action="/altaInventario" method="POST">
           <input type="hidden" name="menuAlta" id="menuAlta" value="0">
-          <button type="submit" class="btn btnMorado btn-lg" id="btnMenuAlta"><i class="fa fa-plus fa-2x titulos"></i> 
+          <button type="submit" class="btn btnMorado" id="btnMenuAlta"><i class="fa fa-plus fa-2x titulos"></i> 
               <label class="titulos"> Agregar producto</label>
           </button>
         </form>
+  </div>
+</div>
+<div class="panel panel-info col-sm-12">
       <br /><br /><br />
       <!-- Consulta de inventario -->
       <h2> Productos  </h2>
-      <div class="panel panel-info col-sm-12">
         <table class="table table-bordered" id="tblProducts">
           <thead style="text-align: center;">
               <tr class="headTr centrado">
-                  <th><h3><label for="barcode" class="titulos"><h3>Código de barras</label></h3></th>
-                  <th><h3><label for="product-name" class="titulos"  ><h3>Nombre del producto</label></h3></th>
+                  <th><h3><label for="barcode" class="titulos"><h3>SKU</label></h3></th>
+                  <th><h3><label for="product-name" class="titulos"  ><h3>Descripci&oacute;n</label></h3></th>
                   <th ><h3><label for="quantity" class="titulos"><h3>Cantidad</label></h3></th>
-                  <th><h3><label for="price" class="titulos"><h3>Precio Venta $</label></h3></th>
+                  <th><h3><label for="price" class="titulos"><h3>Precio $</label></h3></th>
                   <th><h3><label  class="titulos"><h3>Modificar</h3></th>
                   <th><h3><label  class="titulos"><h3>Borrar</h3></th>
               </tr>
@@ -147,16 +156,16 @@
           <tbody class="labelTd">
              {% for product in products%}
              <tr>
-              <td>
+              <td class="labelTdMedium">
                 {{product[1]}}
               </td>
               <td>
                 {{product[2]}}
               </td>
-              <td style="text-align: center;">
+              <td style="text-align: center; width: 100px;">
                 {{product[3]}}
               </td>
-              <td>
+              <td tyle="twidth: 150px;">
                 &nbsp;{{product[4]}}
               </td>
               <td style="text-align: center;">
@@ -180,7 +189,6 @@
           </tbody>
       </table>
       <br /><br />
-    </div>
 </div>
     
 
