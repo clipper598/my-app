@@ -95,7 +95,7 @@ def hello():
         
     cursor = conexion_MySQLdb.cursor()
     try:
-        cursor.execute("SELECT id, barcode, product_name, quantity, price FROM products")
+        cursor.execute("SELECT id, barcode, product_name, quantity, price FROM products order by product_name")
         products = cursor.fetchall()
         print(products)
     finally:
@@ -124,7 +124,7 @@ def eliminaInventario():
 
             cursor = conexion_MySQLdb.cursor()
             try:
-                cursor.execute("SELECT id, barcode, product_name, quantity, price FROM products")
+                cursor.execute("SELECT id, barcode, product_name, quantity, price FROM products order by product_name")
                 products = cursor.fetchall()
                 #print(products)
                 conexion_MySQLdb.commit()
