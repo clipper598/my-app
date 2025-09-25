@@ -82,9 +82,13 @@
   }
 
   .titulosStock {
-    font-size: 18px;
+    font-size: 16px;
     text-align: center;
     color: #e20099;
+}
+
+.titulosStockLabel {
+  font-size: 14px;
 }
 
   .centrado{
@@ -121,8 +125,7 @@
   #tblProducts{
     border-collapse: separate;
     border-spacing: 20;
-    border-color: #943D73;
-    border-radius: 15px;
+    border-radius: 5px;
      -moz-border-radius: 20px;
 }
 
@@ -168,7 +171,6 @@
 <div class="col-sm-12">
       <br /><br /><br />
       <!-- Consulta de inventario -->
-      <h2> Productos  </h2>
         <table class="table table-bordered" id="tblProducts">
           <thead style="text-align: center;">
               <tr class="headTr centrado">
@@ -185,7 +187,7 @@
                 <br />
                 <span class="labelTdPrecio"> $ &nbsp; {{product[4]}}</span> 
                 <br /> 
-                <span class="titulosStock"> Solo queda(n): &nbsp; <label style="font-weight: bold; size: 18px;">   {{product[3]}} </label> &nbsp; en stock  </span> 
+                <span class="titulosStockLabel"> Solo queda(n): &nbsp; <label style="font-weight: bold; size: 18px;" class="titulosStock" >   {{product[3]}} </label> &nbsp; en stock  </span> 
                 <br /> 
                 <div style="text-align: left">
                   <table>
