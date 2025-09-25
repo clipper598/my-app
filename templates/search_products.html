@@ -20,9 +20,9 @@
         font-family: Helvetica, Arial, sans-serif;
     }
     .titulos {
-        font-size: 25px;
+        font-size: 18px;
         text-align: center;
-        color: #004a77ff;
+        color: #fff;
         font-weight: bold;
     }
     
@@ -32,6 +32,12 @@
       color:#fff;
     }
 
+.titulosBotones {
+      font-size: 18px;
+      color: #fff;
+      font-weight: bold;
+}
+
     .labelTd{
       font-size: 20px;
       text-align: left;
@@ -39,14 +45,14 @@
   }
 
   .labelTdMedium{
-    font-size: 18px;
+    font-size: 17px;
     text-align: left;
     color: #000;
     font-weight: bold;
 }
 
 .labelTdPrecio{
-  font-size: 28px;
+  font-size: 26px;
   text-align: left;
   color: #4d7fc4;
   font-weight: bold;
@@ -69,13 +75,7 @@
     }
 
     .titulosEncabezado {
-      font-size: 40px;
-      text-align: center;
-      color: #fff;
-      font-weight: bold;
-  }
-  .titulos {
-      font-size: 25px;
+      font-size: 30px;
       text-align: center;
       color: #fff;
       font-weight: bold;
@@ -119,7 +119,7 @@
 
   .imagen-redondeada {
     border-radius: 25px; /* Redondea las esquinas */
-    width: 250px; /* Ancho de la imagen */
+    width: 160px; /* Ancho de la imagen */
   }
 
   #tblProducts{
@@ -141,40 +141,45 @@
 <div class="col-sm-12">
   <div>
       <br />
-        <div class="bgMorado  centrado" style="height: 280px;">
+        <div class="bgMorado  centrado" style="height: 180px;">
           <br /><br />
-            <img src="/static/titas.jpg"  width="200" height="140" class="imagen-redondeada"> &nbsp;
+            <img src="/static/titas.jpg"  height="120" class="imagen-redondeada"> &nbsp;
             <label class="titulosEncabezado"> Tita's Toys</label>
-            <span class="bgMorado titulos izquierdo">
-              <h2><br /> &nbsp;&nbsp; <i class="fa fa-search fa-lg" aria-hidden="true"></i> Consulta de inventario</h2> 
-            </span>
         </div>
 
          <!-- Div Menu navegacion -->
          <div class="izquierdo">
-          <form action="/menu" method="POST">
-            <input type="hidden" name="menuNavegacion" id="menuNavegacion" value="0">
-            <button type="submit" class="btn btn-sm btnNavegacion" id="btnMenuAlta"><i class="fa fa-cog fa-2x titulos"></i> 
-                <label class="titulos"> Men&uacute;</label>
-            </button>
-           </form>
+          <table>
+            <tr>
+              <td>
+                <form action="/menu" method="POST">
+                  <input type="hidden" name="menuNavegacion" id="menuNavegacion" value="0">
+                  <button type="submit" class="btn btn-sm btnNavegacion" id="btnMenuAlta"><i class="fa fa-cog fa-2x titulos"></i> 
+                  <label class="titulos"> Men&uacute;</label>
+                  </button>
+                </form>
+              </td>
+              <td style="width: 10px;"> </td>
+              <td>
+                <form action="/altaInventario" method="POST">
+                  <input type="hidden" name="menuAlta" id="menuAlta" value="0">
+                  <button type="submit" class="btn btnMorado" id="btnMenuAlta"><i class="fa fa-plus fa-2x titulos"></i> 
+                      <label class="titulosBotones"> Agregar</label>
+                  </button>
+                </form>
+              </td>
+              </tr>
+            </table>
         </div>
-        <br/><br/>
-        <form action="/altaInventario" method="POST">
-          <input type="hidden" name="menuAlta" id="menuAlta" value="0">
-          <button type="submit" class="btn btnMorado" id="btnMenuAlta"><i class="fa fa-plus fa-2x titulos"></i> 
-              <label class="titulos"> Agregar producto</label>
-          </button>
-        </form>
   </div>
 </div>
 <div class="col-sm-12">
-      <br /><br /><br />
+      <br /><br />
       <!-- Consulta de inventario -->
         <table class="table table-bordered" id="tblProducts">
           <thead style="text-align: center;">
               <tr class="headTr centrado">
-                  <th><h3><label for="product-name" class="titulos"  ><h3>Producto</label></h3></th>
+                  <th><label for="product-name" class="titulos"  ><i class="fa fa-search fa-lg" aria-hidden="true"></i> Consulta de inventario</h4> </th>
               </tr>
           </thead>
           <tbody class="labelTd">
@@ -203,11 +208,11 @@
                             <button  type="submit" class="btn btn-primary" id="update-product"><i class="fa fa-pencil"></i></button>
                             </form>
                         </td>
-                        <td style="width: 70px;">  &nbsp; &nbsp; </td> 
+                        <td style="width: 60px;">  &nbsp; &nbsp; </td> 
                         <td> 
                           <form action="/eliminaInventario" method="post">
                             <input type="hidden" name="id" value="{{product[0]}}">
-                            <button  type="submit" class="btn btn-danger" id="delete-product"><i class="fa fa-remove"></i></button>
+                            <button  type="submit" class="btn btn-danger" id="delete-product"><i class="fa fa-trash"></i></button>
                           </form>
                         </td> 
                   </table>

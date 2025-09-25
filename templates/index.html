@@ -24,29 +24,29 @@
     }
 
     .titulosBotones {
-      font-size: 25px;
+      font-size: 18px;
       color: #fff;
       font-weight: bold;
   }
     
-    .inputsMedianos{
+.inputsMedianos{
 
-      border-radius: 30px;
+      border-radius: 10px;
       border-color: #004a77ff;
       border-solid: 4px;
       height: 60%;
   }
 
     .data {
-        font-size: 23px;
+        font-size: 20px;
         text-align: left;
         color: #000000;
     }
 
-    body {
-      background-color: #fbdbf0;
-      font-family: Helvetica, Arial, sans-serif;
-  }
+body {
+    background-color: #fbdbf0;
+    font-family: Helvetica, Arial, sans-serif;
+}
 
   .headTr{
     background-color: #eb54ba;
@@ -77,13 +77,20 @@
   }
 
   .titulosEncabezado {
-    font-size: 40px;
+    font-size: 30px;
     text-align: center;
     color: #fff;
     font-weight: bold;
 }
+.titulosSubEncabezado {
+  font-size: 14px;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+}
+
 .titulos {
-    font-size: 20px;
+    font-size: 18px;
     text-align: center;
     color: #fff;
     font-weight: bold;
@@ -115,6 +122,7 @@ text-align: center;
 
 .btnMorado{
     background-color: #943D73;
+    height: ;
 }
 
 .btnNavegacion{
@@ -128,61 +136,66 @@ video{
 
 .imagen-redondeada {
   border-radius: 25px; /* Redondea las esquinas */
-  width: 250px; /* Ancho de la imagen */
+  width: 160px; /* Ancho de la imagen */
 }
 </style>
   <body>
     <br /><br />
-    <div class="panel panel-info panelGris col-sm-12" id="divFormulario">
+    <div class="panel panel-info  col-sm-12" id="divFormulario">
         <br />
-        <div class="bgMorado  centrado" style="height: 280px;">
+        <div class="bgMorado  centrado" style="height: 180px;">
           <br /><br />
-            <img src="/static/titas.jpg"  width="200" height="150" class="imagen-redondeada"> &nbsp;
+            <img src="/static/titas.jpg"  height="120" class="imagen-redondeada"> &nbsp;
             <label class="titulosEncabezado"> Tita's Toys</label>
-            <span class="bgMorado titulos izquierdo">
-                <h2><br /> &nbsp;&nbsp; <i class="fa fa-search fa-lg" aria-hidden="true"></i> Alta de productos</h2>
-            </span>
         </div>
         <!-- Div Menu navegacion -->
         <div class="izquierdo">
-          <form action="/menu" method="POST">
-            <input type="hidden" name="menuNavegacion" id="menuNavegacion" value="0">
-            <button type="submit" class="btn btn-sm btnNavegacion" id="btnMenuAlta"><i class="fa fa-cog fa-2x titulos"></i> 
-                <label class="titulos"> Men&uacute;</label>
-            </button>
-           </form>
+          <table>
+            <tr>
+              <td>
+                <form action="/menu" method="POST">
+                  <input type="hidden" name="menuNavegacion" id="menuNavegacion" value="0">
+                  <button type="submit" class="btn btn-sm btnNavegacion" id="btnMenuAlta"><i class="fa fa-cog fa-2x titulos"></i> 
+                      <label class="titulos"> Men&uacute;</label>
+                  </button>
+                 </form>
+              </td>
+              </tr>
+            </table>
+
+         
         </div>
 
-        <div class="panel-body" id="divPanelBody">
-              <br />
-        <button type="button" id="start-camera"  class="btn btnMorado titulosBotones" data-toggle="modal" data-target="#myModal">Escanear</button> <br /> <br />
+        <div class="panel-body" id="divPanelBody">  
           <!-- Formulario para entrada de datos -->
           <div class="panel panel-info col-sm-12">
+            <label class="labels"><h3> Alta de productos</h3></label> &nbsp;  <button type="button" id="start-camera"  class="btn btn-sm btnMorado titulosBotones" data-toggle="modal" data-target="#myModal"> <i class="fa fa-camera fa-2x titulos"></i></button>
+            <br />
                 <form action="/altaInventario" method="post">
                 <!-- Código de barras -->
-                <label for="barcode" class="labels"><h3>Código de barras:</h3></label>
+                <label for="barcode" class="labels"><h4>Código de barras:</h4></label>
                 <input type="text"  class="form-control data inputsMedianos" id="barcode" name="barcode" autofocus required value=""/>
                 <br /><br />
 
                 <!-- Nombre del producto -->
-                <label for="product-name" class="labels"><h3>Nombre del producto:</h3></label>
+                <label for="product-name" class="labels"><h4>Nombre del producto:</h4></label>
                 <input type="text" class="form-control data inputsMedianos"  id="product-name" name="productName" required value=""/>
                 <br /><br />
 
                 <!-- Cantidad con spinner -->
-                <label for="quantity" class="labels"><h3>Cantidad:</h3></label>
+                <label for="quantity" class="labels"><h4>Cantidad:</h4></label>
                 <input type="number" class="form-control data inputsMedianos" id="quantity" name="quantity" min="1" value="1" required value="" size="6"/>
                 <br /><br />
 
                 <!-- Precio -->
-                <label for="price" class="labels"><h3>Precio: $</h3></label>
+                <label for="price" class="labels"><h4>Precio: $</h4></label>
                 <input type="text" class="form-control data inputsMedianos" id="price" name="price" required value="" size="6"/>
                 <br /><br />
 
                 <!-- Botón para enviar -->
                 <div style="text-align: right;">
                   <button type="submit" class="btn btnMorado titulosBotones"> 
-                    <i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Agregar producto
+                    <i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Agregar
                   </button>
                 </div> <!-- Botón para enviar -->
                 </form>
