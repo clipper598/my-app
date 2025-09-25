@@ -15,28 +15,28 @@
         font-family: Helvetica, Arial, sans-serif;
     }
     .titulos {
-        font-size: 25px;
-        text-align: center;
-        color: #004a77ff;
-        font-weight: bold;
-    }
-
-    .titulosBotones {
       font-size: 25px;
-      color: #fff;
+      text-align: center;
+      color: #004a77ff;
       font-weight: bold;
   }
+
+  .titulosBotones {
+    font-size: 18px;
+    color: #fff;
+    font-weight: bold;
+}
     
     .inputsMedianos{
 
-      border-radius: 30px;
+      border-radius: 10px;
       border-color: #004a77ff;
       border-solid: 4px;
       height: 60%;
   }
 
     .data {
-        font-size: 23px;
+        font-size: 18px;
         text-align: left;
         color: #000000;
     }
@@ -46,22 +46,10 @@
       font-family: Helvetica, Arial, sans-serif;
   }
 
-    .headTr{
-    background-color: #eb54ba;
-    text-align: center;
-    color:#fff;
-    }
-
   .labelTd{
     font-size: 22px;
     text-align: left;
     color: #000;
-}
-
-.labelButtonsMenu{
-  font-size: 28px;
-  text-align: left;
-  color: #fff;
 }
 
   .data {
@@ -75,20 +63,20 @@
   }
 
   .titulosEncabezado {
-    font-size: 40px;
+    font-size: 30px;
     text-align: center;
     color: #fff;
     font-weight: bold;
 }
 .titulos {
-    font-size: 20px;
+    font-size: 18px;
     text-align: center;
     color: #fff;
     font-weight: bold;
 }
 
 .labels {
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
   color: #943D73;
   font-weight: bold;
@@ -129,21 +117,17 @@ text-align: center;
 
 .imagen-redondeada {
   border-radius: 25px; /* Redondea las esquinas */
-  width: 250px; /* Ancho de la imagen */
+  width: 140px; /* Ancho de la imagen */
 }
 
 </style>
   <body>
-    <br /><br />
     <div class="panel panel-info col-sm-12">
         <br />
-        <div class="bgMorado  centrado" style="height: 280px;">
+        <div class="bgMorado  centrado" style="height: 190px;">
           <br /><br />
-            <img src="/static/titas.jpg"  width="220" height="150" class="imagen-redondeada"> &nbsp;
+            <img src="/static/titas.jpg"  height="120" class="imagen-redondeada"> &nbsp;
             <label class="titulosEncabezado"> Tita's Toys</label>
-            <span class="bgMorado titulos izquierdo">
-                <h2><br />  &nbsp;&nbsp; <i class="fa fa-pencil fa-lg" aria-hidden="true"></i> Modificar productos</h2>
-            </span>
         </div>
         <!-- Div Menu navegacion -->
         <div class="izquierdo">
@@ -155,6 +139,7 @@ text-align: center;
         </div>
 
       <div class="panel-body">
+        <label class="labels"><h3> Actualizar Producto</h3></label>
       <br />
       <div class="col-sm-2"></div>
       <!-- Formulario para entrada de datos -->
@@ -163,22 +148,22 @@ text-align: center;
 
         <input type="hidden"  class="form-control data inputsMedianos" id="id" name="id" required value="{{id}}" readonly/>
         <!-- Código de barras -->
-        <label for="barcode" class="labels"><h3>Código de barras:</h3></label>
+        <label for="barcode" class="labels"><h4>Código de barras:</h4></label>
         <input type="text"  class="form-control data inputsMedianos" id="barcode" name="barcode" required value="{{barcode}}" readonly/>
         <br /><br />
 
          <!-- Descricpcion producto -->
-         <label for="barcode" class="labels"><h3>Nombre del producto:</h3></label>
+         <label for="barcode" class="labels"><h4>Nombre del producto:</h4></label>
          <input type="text"  class="form-control data inputsMedianos" id="product_name" name="product_name"  required value="{{product_name}}"/>
          <br /><br />
 
         <!-- Cantidad con spinner -->
-        <label for="quantity" class="labels"><h3>Cantidad:</h3></label>
+        <label for="quantity" class="labels"><h4>Cantidad:</h4></label>
         <input type="number" class="form-control data inputsMedianos" id="quantity" name="quantity" min="1"  required value="{{quantity}}" size="6"/>
         <br /><br />
 
         <!-- Precio -->
-        <label for="price" class="labels"><h3>Precio: $</h3></label>
+        <label for="price" class="labels"><h4>Precio: $</h4></label>
         <input type="text" class="form-control data inputsMedianos" id="price" name="price" required value="{{price}}" size="2"/>
         <br /><br />
         <!-- Botón para actualizar -->
