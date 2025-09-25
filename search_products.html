@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Titas Toys</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+  <style>
+    body {
+        background-color: #fff;
+        font-family: Helvetica, Arial, sans-serif;
+    }
+    .titulos {
+        font-size: 25px;
+        text-align: center;
+        color: #004a77ff;
+        font-weight: bold;
+    }
+    
+    .headTr{
+      background-color: #eb54ba;
+      text-align: center;
+      color:#fff;
+    }
+
+    .labelTd{
+      font-size: 20px;
+      text-align: left;
+      color: #000;
+  }
+
+  .labelTdMedium{
+    font-size: 18px;
+    text-align: left;
+    color: #4d7fc4;
+    font-weight: bold;
+}
+
+.labelTdPrecio{
+  font-size: 28px;
+  text-align: left;
+  color: #4d7fc4;
+  font-weight: bold;
+}
+
+  .labelButtonsMenu{
+    font-size: 28px;
+    text-align: left;
+    color: #fff;
+}
+
+    .data {
+        font-size: 23px;
+        text-align: left;
+        color: #000000;
+    }
+
+    .buttonTitle{
+        font-size: 23px;
+    }
+
+    .titulosEncabezado {
+      font-size: 50px;
+      text-align: center;
+      color: #fff;
+      font-weight: bold;
+  }
+  .titulos {
+      font-size: 25px;
+      text-align: center;
+      color: #fff;
+      font-weight: bold;
+  }
+
+  .titulosStock {
+    font-size: 16px;
+    text-align: center;
+    color: #e20099;
+}
+
+  .centrado{
+  text-align: center;
+  }
+
+  .izquierdo{
+      text-align: left;
+
+      }
+
+  .bgMorado{
+      background-color: #e20099;
+  }
+
+  .bgMoradoMedio{
+    background-color: #eb54ba;
+  }
+
+  .btnNavegacion{
+    background-color: #e733ad;
+    width: 120px;
+  }
+
+  .btnMorado{
+      background-color: #943D73;
+  }
+
+  .imagen-redondeada {
+    border-radius: 25px; /* Redondea las esquinas */
+    width: 250px; /* Ancho de la imagen */
+  }
+
+  #tblProducts{
+    border-collapse: separate;
+    border-spacing: 20;
+    border-radius: 5px;
+     -moz-border-radius: 20px;
+}
+
+.sombras {
+  padding: 20px;
+  box-shadow:
+    inset 0 -3em 3em rgba(0, 0, 0, 0.1),
+    0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+</style>
+<body>
+<div class="col-sm-12">
+  <div>
+      <br />
+        <div class="bgMorado  centrado" style="height: 280px;">
+          <br /><br />
+            <img src="/static/titas.jpg"  width="220" height="150" class="imagen-redondeada"> &nbsp;
+            <label class="titulosEncabezado"> Tita's Toys</label>
+            <span class="bgMorado titulos izquierdo">
+              <h2><br /> &nbsp;&nbsp; <i class="fa fa-search fa-lg" aria-hidden="true"></i> Consulta de inventario</h2> 
+            </span>
+        </div>
+
+         <!-- Div Menu navegacion -->
+         <div class="izquierdo">
+          <form action="/menu" method="POST">
+            <input type="hidden" name="menuNavegacion" id="menuNavegacion" value="0">
+            <button type="submit" class="btn btn-sm btnNavegacion" id="btnMenuAlta"><i class="fa fa-cog fa-2x titulos"></i> 
+                <label class="titulos"> Men&uacute;</label>
+            </button>
+           </form>
+        </div>
+        <br/><br/>
+        <form action="/altaInventario" method="POST">
+          <input type="hidden" name="menuAlta" id="menuAlta" value="0">
+          <button type="submit" class="btn btnMorado" id="btnMenuAlta"><i class="fa fa-plus fa-2x titulos"></i> 
+              <label class="titulos"> Agregar producto</label>
+          </button>
+        </form>
+  </div>
+</div>
+<div class="col-sm-12">
+      <br /><br /><br />
+      <!-- Consulta de inventario -->
+        <table class="table table-bordered" id="tblProducts">
+          <thead style="text-align: center;">
+              <tr class="headTr centrado">
+                  <th><h3><label for="product-name" class="titulos"  ><h3>Producto</label></h3></th>
+              </tr>
+          </thead>
+          <tbody class="labelTd">
+             {% for product in products%}
+             <tr>
+              <td class="sombras">
+                <span class="labelTdMedium"> SKU &nbsp; {{product[1]}}   </span> 
+                <br />
+                {{product[2]}}
+                <br />
+                <span class="labelTdPrecio"> $ &nbsp; {{product[4]}}</span> 
+                <br /> 
+                <span> Solo queda(n): &nbsp; <label style="font-weight: bold; size: 18px;" class="titulosStock" >   {{product[3]}} </label> &nbsp; en stock  </span> 
+                <br /> 
+                <div style="text-align: left">
+                  <table>
+                    <tr>
+                        <td> 
+                            <form action="/actualizarInventario" method="post">
+                            <input type="hidden" name="id" value="{{product[0]}}">
+                            <input type="hidden" name="codigoBarras" value="{{product[1]}}">
+                            <input type="hidden" name="nombreProducto" value="{{product[2]}}">
+                            <input type="hidden" name="cantidad" value="{{product[3]}}">
+                            <input type="hidden" name="precio" value="{{product[4]}}">
+                            <input type="hidden" name="menuActualiza" value="0">
+                            <button  type="submit" class="btn btn-primary" id="update-product"><i class="fa fa-pencil"></i></button>
+                            </form>
+                        </td>
+                        <td style="width: 70px;">  &nbsp; &nbsp; </td> 
+                        <td> 
+                          <form action="/eliminaInventario" method="post">
+                            <input type="hidden" name="id" value="{{product[0]}}">
+                            <button  type="submit" class="btn btn-danger" id="delete-product"><i class="fa fa-remove"></i></button>
+                          </form>
+                        </td> 
+                  </table>
+                </div> 
+              </td>
+            </tr>
+             {% endfor%}
+          </tbody>
+      </table>
+      <br /><br />
+</div>
+    
+
+    <script>
+      $(document).ready(function(){
+          $('#btnMenuAlta').on('click', function() {
+              $(menuAlta).val(1); 
+          });
+      });
+    </script>
+    <script>
+      $(document).ready(function(){
+        $('#tblProducts').DataTable();
+      });
+      
+  </script>
+  </body>
+</html>

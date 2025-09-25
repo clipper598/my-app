@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Titas Toys</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <style>
+    body {
+        background-color: #fcf4dd;
+        font-family: Helvetica, Arial, sans-serif;
+    }
+    .titulos {
+        font-size: 25px;
+        text-align: center;
+        color: #004a77ff;
+        font-weight: bold;
+    }
+
+    .titulosBotones {
+      font-size: 25px;
+      color: #fff;
+      font-weight: bold;
+  }
+    
+    .inputsMedianos{
+
+      border-radius: 30px;
+      border-color: #004a77ff;
+      border-solid: 4px;
+      height: 60%;
+  }
+
+    .data {
+        font-size: 23px;
+        text-align: left;
+        color: #000000;
+    }
+
+    body {
+      background-color: #fbdbf0;
+      font-family: Helvetica, Arial, sans-serif;
+  }
+
+  .headTr{
+    background-color: #eb54ba;
+    text-align: center;
+    color:#fff;
+  }
+
+  .labelTd{
+    font-size: 22px;
+    text-align: left;
+    color: #000;
+}
+
+.labelButtonsMenu{
+  font-size: 28px;
+  text-align: left;
+  color: #fff;
+}
+
+  .data {
+      font-size: 23px;
+      text-align: left;
+      color: #000000;
+  }
+
+  .buttonTitle{
+      font-size: 23px;
+  }
+
+  .titulosEncabezado {
+    font-size: 40px;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+}
+.titulos {
+    font-size: 20px;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+}
+
+.labels {
+  font-size: 18px;
+  text-align: center;
+  color: #943D73;
+  font-weight: bold;
+}
+
+.centrado{
+text-align: center;
+}
+
+.izquierdo{
+    text-align: left;
+
+    }
+
+.bgMorado{
+    background-color: #e20099;
+}
+
+.bgMoradoMedio{
+  background-color: #eb54ba;
+}
+
+.btnMorado{
+    background-color: #943D73;
+}
+
+.btnNavegacion{
+  background-color: #e733ad;
+  width: 120px;
+}
+
+video{
+  width: 100%;
+}
+
+.imagen-redondeada {
+  border-radius: 25px; /* Redondea las esquinas */
+  width: 250px; /* Ancho de la imagen */
+}
+</style>
+  <body>
+    <br /><br />
+    <div class="panel panel-info panelGris col-sm-12" id="divFormulario">
+        <br />
+        <div class="bgMorado  centrado" style="height: 280px;">
+          <br /><br />
+            <img src="/static/titas.jpg"  width="200" height="150" class="imagen-redondeada"> &nbsp;
+            <label class="titulosEncabezado"> Tita's Toys</label>
+            <span class="bgMorado titulos izquierdo">
+                <h2><br /> &nbsp;&nbsp; <i class="fa fa-search fa-lg" aria-hidden="true"></i> Alta de productos</h2>
+            </span>
+        </div>
+        <!-- Div Menu navegacion -->
+        <div class="izquierdo">
+          <form action="/menu" method="POST">
+            <input type="hidden" name="menuNavegacion" id="menuNavegacion" value="0">
+            <button type="submit" class="btn btn-sm btnNavegacion" id="btnMenuAlta"><i class="fa fa-cog fa-2x titulos"></i> 
+                <label class="titulos"> Men&uacute;</label>
+            </button>
+           </form>
+        </div>
+
+        <div class="panel-body" id="divPanelBody">
+              <br />
+        <button type="button" id="start-camera"  class="btn btnMorado titulosBotones" data-toggle="modal" data-target="#myModal">Escanear</button> <br /> <br />
+          <!-- Formulario para entrada de datos -->
+          <div class="panel panel-info col-sm-12">
+                <form action="/altaInventario" method="post">
+                <!-- Código de barras -->
+                <label for="barcode" class="labels"><h3>Código de barras:</h3></label>
+                <input type="text"  class="form-control data inputsMedianos" id="barcode" name="barcode" autofocus required value=""/>
+                <br /><br />
+
+                <!-- Nombre del producto -->
+                <label for="product-name" class="labels"><h3>Nombre del producto:</h3></label>
+                <input type="text" class="form-control data inputsMedianos"  id="product-name" name="productName" required value=""/>
+                <br /><br />
+
+                <!-- Cantidad con spinner -->
+                <label for="quantity" class="labels"><h3>Cantidad:</h3></label>
+                <input type="number" class="form-control data inputsMedianos" id="quantity" name="quantity" min="1" value="1" required value="" size="6"/>
+                <br /><br />
+
+                <!-- Precio -->
+                <label for="price" class="labels"><h3>Precio: $</h3></label>
+                <input type="text" class="form-control data inputsMedianos" id="price" name="price" required value="" size="6"/>
+                <br /><br />
+
+                <!-- Botón para enviar -->
+                <div style="text-align: right;">
+                  <button type="submit" class="btn btnMorado titulosBotones"> 
+                    <i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Agregar producto
+                  </button>
+                </div> <!-- Botón para enviar -->
+                </form>
+                <br /><br />
+          </div>  <!-- fin div Formulario para entrada de datos -->
+
+        </div>  <!-- fin divPanelBody-->
+</div> 
+
+    <div class="container">
+    
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content" style="text-align: center;">
+            <div class="modal-header">
+              <button type="button" id="stop-camera" class="close" data-dismiss="modal">&times;</button>
+              <h4>Acerca el código de barras</h4>
+            </div>
+            <div class="modal-body" style="height: 450px; text-align: center;">
+                <!-- Contenedor para el video -->
+                <div id="camera-container">
+                    <div id="video-container" style="width: 100%; height: 230px;"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        let isCameraActive = true
+
+        // Iniciar la cámara
+        $('#start-camera').on('click', function () {
+
+
+            $('#camera-container').show()
+            $('#stop-camera').show()
+      
+            // Configurar QuaggaJS
+            Quagga.init(
+              {
+                inputStream: {
+                  name: 'Live',
+                  type: 'LiveStream',
+                  target: document.querySelector('#video-container') // Contenedor del video
+                },
+                decoder: {
+                  readers: ['code_128_reader', 'ean_reader'] // Tipos de códigos de barras
+                }
+              },
+              function (err) {
+                if (err) {
+                  console.error(err)
+                  alert('Error al iniciar la cámara.')
+                  return
+                }
+                Quagga.start()
+              }
+            )
+      
+            // Detectar códigos de barras
+            Quagga.onDetected(function (data) {
+              const barcode = data.codeResult.code
+              $('#scanned-barcode').text(barcode) // Mostrar el código escaneado
+              $('#barcode').val(barcode) // Rellenar el campo de entrada
+              Quagga.stop() // Detener la cámara después de escanear
+              $('#camera-container').hide()
+              $('#stop-camera').hide()
+              $('#start-camera').show()
+              $('#stop-camera').trigger('click');
+            })
+          
+        })
+      
+        // Detener la cámara
+        $('#stop-camera').on('click', function () {
+          if (isCameraActive) {
+            Quagga.stop()
+            $('#camera-container').hide()
+            $('#stop-camera').hide()
+            $('#start-camera').show()
+            $('#myModal').hide()
+            isCameraActive = false
+          }
+        })
+      })
+    </script>
+  </body>
+</html>
