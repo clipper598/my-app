@@ -4,15 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Titas Toys</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- CSS de DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- JS de DataTables -->
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script> 
   </head>
   <style>
     body {
@@ -150,94 +147,67 @@
 </style>
 <body>
 <div class="col-sm-12">
-  <div>
-        <div class="bgMorado  centrado" style="height: 130px;">
-          <br /><br />
-            <img src="/static/titas.jpg" class="imagen-redondeada"> &nbsp;
-            <label class="titulosEncabezado"> Tita's Toys</label>
-        </div>
-
-         <!-- Div Menu navegacion -->
-         <div class="izquierdo">
-          <table>
-            <tr>
-              <td>
-                <form action="/menu" method="POST">
-                  <input type="hidden" name="menuNavegacion" id="menuNavegacion" value="0">
-                  <button type="submit" class="btn btn-sm btnNavegacion" id="btnMenuAlta"><i class="fa fa-cog fa-2x titulos"></i> 
-                  <label class="titulos"> Men&uacute;</label>
-                  </button>
-                </form>
-              </td>
-              <td style="width: 10px;"> </td>
-              <td>
-                <form action="/altaInventario" method="POST">
-                  <input type="hidden" name="menuAlta" id="menuAlta" value="0">
-                  <button type="submit" class="btn btnMorado" id="btnMenuAlta"><i class="fa fa-plus fa-2x titulos"></i> 
-                      <label class="titulosBotones"> Agregar</label>
-                  </button>
-                </form>
-              </td>
-              </tr>
-            </table>
-        </div>
-  </div>
-</div>
-<div class="col-sm-12">
-      <br /><br />
-      <!-- Consulta de inventario -->
-        <table class="table table-bordered" id="tblProducts">
-          <thead style="text-align: center;">
-              <tr class="headTr centrado" >
-                  <th colspan="2"><label for="product-name" class="titulos"  ><i class="fa fa-search fa-lg" aria-hidden="true"></i> Consulta de inventario</h4> </th>
-              </tr>
-          </thead>
-          <tbody class="labelTd">
-             {% for product in products%}
-             <tr class="sombras">
-              <td style = "width: 120px; text-align: center; vertical-align: middle;">
-                <img src={{product[5]}} class="img-fluid imgTamanioProducto"  width="100">
-              </td>
-              <td> 
-                <span class="labelTdMedium"> SKU &nbsp; {{product[1]}}   </span> 
-                <br />
-                <label class="labelTdDescProducto"> {{product[2]}} </label>
-                <br />
-                <span class="labelTdPrecio"> $ &nbsp; {{product[4]}}</span> 
-                <br /> 
-                <span class="titulosStockLabel"> queda(n): &nbsp; <label style="font-weight: bold; size: 18px;" class="titulosStock" >   {{product[3]}} </label> &nbsp; en stock  </span> 
-                <br /> 
-                <div style="text-align: left">
-                  <table>
-                    <tr>
-                        <td> 
-                            <form action="/actualizarInventario" method="post">
-                            <input type="hidden" name="id" value="{{product[0]}}">
-                            <input type="hidden" name="codigoBarras" value="{{product[1]}}">
-                            <input type="hidden" name="nombreProducto" value="{{product[2]}}">
-                            <input type="hidden" name="cantidad" value="{{product[3]}}">
-                            <input type="hidden" name="precio" value="{{product[4]}}">
-                            <input type="hidden" name="menuActualiza" value="0">
-                            <button  type="submit" class="btn btn-primary" id="update-product"><i class="fa fa-pencil"></i></button>
-                            </form>
-                        </td>
-                        <td style="width: 60px;">  &nbsp; &nbsp; </td> 
-                        <td> 
-                          <form action="/eliminaInventario" method="post">
-                            <input type="hidden" name="id" value="{{product[0]}}">
-                            <button  type="submit" class="btn btn-danger" id="delete-product"><i class="fa fa-trash"></i></button>
-                          </form>
-                        </td> 
-                  </table>
-                </div> 
-              </td>
+    <br /><br />
+    <!-- Consulta de inventario -->
+    <table class="table table-bordered display" id="tblProducts">
+        <thead style="text-align: center;">
+            <tr class="headTr centrado">
+                <th>Imagen</th>
+                <th>Detalles del Producto</th>
             </tr>
-             {% endfor%}
-          </tbody>
-      </table>
-      <br /><br />
+        </thead>
+        <tbody class="labelTd">
+            {% for product in products %}
+            <tr class="sombras">
+                <td style="width: 120px; text-align: center; vertical-align: middle;">
+                    <img src="{{product[5]}}" class="img-fluid imgTamanioProducto" width="100">
+                </td>
+                <td>
+                    <span class="labelTdMedium">SKU &nbsp; {{product[1]}}</span>
+                    <br />
+                    <label class="labelTdDescProducto">{{product[2]}}</label>
+                    <br />
+                    <span class="labelTdPrecio">$ &nbsp; {{product[4]}}</span>
+                    <br />
+                    <span class="titulosStockLabel">queda(n): &nbsp;
+                        <label style="font-weight: bold; size: 18px;" class="titulosStock">{{product[3]}}</label>
+                        &nbsp; en stock
+                    </span>
+                    <br />
+                    <div style="text-align: left">
+                        <table>
+                            <tr>
+                                <td>
+                                    <form action="/actualizarInventario" method="post">
+                                        <input type="hidden" name="id" value="{{product[0]}}">
+                                        <input type="hidden" name="codigoBarras" value="{{product[1]}}">
+                                        <input type="hidden" name="nombreProducto" value="{{product[2]}}">
+                                        <input type="hidden" name="cantidad" value="{{product[3]}}">
+                                        <input type="hidden" name="precio" value="{{product[4]}}">
+                                        <input type="hidden" name="menuActualiza" value="0">
+                                        <button type="submit" class="btn btn-primary" id="update-product">
+                                            <i class="fa fa-pencil"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                                <td style="width: 60px;">&nbsp; &nbsp;</td>
+                                <td>
+                                    <form action="/eliminaInventario" method="post">
+                                        <input type="hidden" name="id" value="{{product[0]}}">
+                                        <button type="submit" class="btn btn-danger" id="delete-product">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
-    
 
     <script>
       $(document).ready(function(){
@@ -247,10 +217,24 @@
       });
     </script>
     <script>
-      $(document).ready(function(){
-        $('#tblProducts').DataTable();
-      });
-      
+      $(document).ready(function() {
+        $('#tblProducts').DataTable({
+            paging: true,        // Habilita la paginación
+            searching: true,     // Habilita el filtro de búsqueda
+            lengthMenu: [10, 25, 50], // Opciones de cantidad de filas por página
+            language: {
+                search: "Buscar:", // Traducción del campo de búsqueda
+                lengthMenu: "Mostrar _MENU_ registros por página",
+                info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                paginate: {
+                    first: "Primero",
+                    last: "Último",
+                    next: "Siguiente",
+                    previous: "Anterior"
+                }
+            }
+        });
+    });
   </script>
   </body>
 </html>
