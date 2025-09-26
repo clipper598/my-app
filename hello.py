@@ -97,7 +97,7 @@ def hello():
     try:
         cursor.execute("SELECT id, barcode, product_name, quantity, price, url_img_product  FROM products order by product_name asc")
         products = cursor.fetchall()
-        print(products)
+        #print(products)
     finally:
         cursor.close()
     conexion_MySQLdb.close()
