@@ -192,8 +192,8 @@
         <tbody class="labelTd">
             {% for product in products %}
             <tr class="sombras">
-                <td style="width: 120px; text-align: center; vertical-align: middle;">
-                    <img src="{{product[5]}}" class="img-fluid imgTamanioProducto" width="100">
+                <td style="width: 120px; text-align: center; vertical-align: middle; background-color: #fff;">
+                    <img src="{{product[5]}}" class="img-fluid imgTamanioProducto" width="110">
                 </td>
                 <td>
                     <span class="labelTdMedium">SKU &nbsp; {{product[1]}}</span>
@@ -217,6 +217,7 @@
                                         <input type="hidden" name="nombreProducto" value="{{product[2]}}">
                                         <input type="hidden" name="cantidad" value="{{product[3]}}">
                                         <input type="hidden" name="precio" value="{{product[4]}}">
+                                        <input type="hidden" name="url_img_product" value="{{product[5]}}">
                                         <input type="hidden" name="menuActualiza" value="0">
                                         <button type="submit" class="btn btn-primary" id="update-product">
                                             <i class="fa fa-pencil"></i>
