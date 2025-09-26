@@ -52,34 +52,37 @@ def actualizarInventario():
         id = request.form.get('id');
         quantity = request.form.get('cantidad');
         product_name = request.form.get('nombreProducto');
+        url_img_product=request.form.get('url_img_product');
         
-        print("1.- Act :" + menuActualiza + ", " + barcode + ", " + price + ", " + quantity + ", " + product_name);
-        return render_template('edit_products.html', id = id, barcode = barcode, price = price, quantity = quantity, product_name = product_name);
+        print("1.- Act :" + menuActualiza + ", " + barcode + ", " + price + ", " + quantity + ", " + product_name + "," + url_img_product);
+        return render_template('edit_products.html', id = id, barcode = barcode, price = price, quantity = quantity, product_name = product_name,url_img_product= url_img_product);
     elif menuActualiza == '1':
             barcode = request.form.get('barcode');
             price = request.form.get('price');
             id = request.form.get('id');
             quantity = request.form.get('quantity');
             product_name = request.form.get('product_name');
+            url_img_product =  request.form.get('url_img_product');
             print("2-. Act :" + menuActualiza);
             print("Voy a actualizar el id: ");
             print(id);
             print(product_name);
             print(price);
             print(quantity);
+            print(url_img_product)
             conexion_MySQLdb = conectionDB()
             cursor = conexion_MySQLdb.cursor()
             try:
                 cursor.execute(
-                    "UPDATE products SET product_name = %s, quantity = %s, price = %s WHERE id = %s",
-                    (product_name, quantity, price, id)
+                    "UPDATE products SET product_name = %s, quantity = %s, price = %s, url_img_product = %s WHERE id = %s",
+                    (product_name, quantity, price, url_img_product, id)
                 )
                 descAct = "Producto actualizado correctamente"
                 conexion_MySQLdb.commit()
             finally:
                 cursor.close()
             conexion_MySQLdb.close()
-            return render_template('edit_products.html', id = id, barcode = barcode, price = price, quantity = quantity, product_name = product_name, descAct=descAct);
+            return render_template('edit_products.html', id = id, barcode = barcode, price = price, quantity = quantity, product_name = product_name, descAct=descAct, url_img_product= url_img_product);
                      
     else:
         return redirect("/consultaInventario"); 
