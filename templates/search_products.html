@@ -45,17 +45,22 @@
   }
 
   .labelTdMedium{
-    font-size: 17px;
+    font-size: 15px;
     text-align: left;
     color: #000;
-    font-weight: bold;
 }
 
 .labelTdPrecio{
-  font-size: 26px;
+  font-size: 22px;
   text-align: left;
   color: #4d7fc4;
   font-weight: bold;
+}
+
+.labelTdDescProducto{
+  font-size: 16px;
+  text-align: left;
+  font-weight: medium;
 }
 
   .labelButtonsMenu{
@@ -75,7 +80,7 @@
     }
 
     .titulosEncabezado {
-      font-size: 30px;
+      font-size: 26px;
       text-align: center;
       color: #fff;
       font-weight: bold;
@@ -119,7 +124,8 @@
 
   .imagen-redondeada {
     border-radius: 25px; /* Redondea las esquinas */
-    width: 140px; /* Ancho de la imagen */
+    width: 100px; /* Ancho de la imagen */
+    height: 80px;
   }
 
   #tblProducts{
@@ -136,13 +142,18 @@
     0 0 0 2px rgb(255, 255, 255),
     0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
+.imgTamanioProducto{
+  height: auto;
+  display: flex;
+  align-items: center;
+}
 </style>
 <body>
 <div class="col-sm-12">
   <div>
-        <div class="bgMorado  centrado" style="height: 190px;">
+        <div class="bgMorado  centrado" style="height: 130px;">
           <br /><br />
-            <img src="/static/titas.jpg"  height="120" class="imagen-redondeada"> &nbsp;
+            <img src="/static/titas.jpg" class="imagen-redondeada"> &nbsp;
             <label class="titulosEncabezado"> Tita's Toys</label>
         </div>
 
@@ -177,21 +188,24 @@
       <!-- Consulta de inventario -->
         <table class="table table-bordered" id="tblProducts">
           <thead style="text-align: center;">
-              <tr class="headTr centrado">
-                  <th><label for="product-name" class="titulos"  ><i class="fa fa-search fa-lg" aria-hidden="true"></i> Consulta de inventario</h4> </th>
+              <tr class="headTr centrado" >
+                  <th colspan="2"><label for="product-name" class="titulos"  ><i class="fa fa-search fa-lg" aria-hidden="true"></i> Consulta de inventario</h4> </th>
               </tr>
           </thead>
           <tbody class="labelTd">
              {% for product in products%}
-             <tr>
-              <td class="sombras">
+             <tr class="sombras">
+              <td style = "width: 120px; text-align: center; vertical-align: middle;">
+                <img src={{product[5]}} class="img-fluid imgTamanioProducto"  width="100">
+              </td>
+              <td> 
                 <span class="labelTdMedium"> SKU &nbsp; {{product[1]}}   </span> 
                 <br />
-                {{product[2]}}
+                <label class="labelTdDescProducto"> {{product[2]}} </label>
                 <br />
                 <span class="labelTdPrecio"> $ &nbsp; {{product[4]}}</span> 
                 <br /> 
-                <span class="titulosStockLabel"> Solo queda(n): &nbsp; <label style="font-weight: bold; size: 18px;" class="titulosStock" >   {{product[3]}} </label> &nbsp; en stock  </span> 
+                <span class="titulosStockLabel"> queda(n): &nbsp; <label style="font-weight: bold; size: 18px;" class="titulosStock" >   {{product[3]}} </label> &nbsp; en stock  </span> 
                 <br /> 
                 <div style="text-align: left">
                   <table>

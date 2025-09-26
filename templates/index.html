@@ -67,7 +67,7 @@ body {
 }
 
   .data {
-      font-size: 23px;
+      font-size: 18px;
       text-align: left;
       color: #000000;
   }
@@ -136,15 +136,15 @@ video{
 
 .imagen-redondeada {
   border-radius: 25px; /* Redondea las esquinas */
-  width: 140px; /* Ancho de la imagen */
+  width: 100px; /* Ancho de la imagen */
+  height: 80px;
 }
 </style>
   <body>
     <div class="panel panel-info  col-sm-12" id="divFormulario">
-        <br />
-        <div class="bgMorado  centrado" style="height: 190px;">
+        <div class="bgMorado  centrado" style="height: 130px;">
           <br /><br />
-            <img src="/static/titas.jpg"  height="120" class="imagen-redondeada"> &nbsp;
+            <img src="/static/titas.jpg"  class="imagen-redondeada"> &nbsp;
             <label class="titulosEncabezado"> Tita's Toys</label>
         </div>
         <!-- Div Menu navegacion -->
@@ -173,7 +173,7 @@ video{
                 <form action="/altaInventario" method="post">
                 <!-- Código de barras -->
                 <label for="barcode" class="labels"><h4>Código de barras:</h4></label>
-                <input type="text"  class="form-control data inputsMedianos" id="barcode" name="barcode" autofocus required value=""/>
+                <input type="number"  class="form-control data inputsMedianos" id="barcode" name="barcode" autofocus required value=""/>
                 <br /><br />
 
                 <!-- Nombre del producto -->
@@ -188,7 +188,7 @@ video{
 
                 <!-- Precio -->
                 <label for="price" class="labels"><h4>Precio: $</h4></label>
-                <input type="text" class="form-control data inputsMedianos" id="price" name="price" required value="" size="6"/>
+                <input type="number" class="form-control data inputsMedianos" id="price" name="price" required value="" size="6"/>
                 <br /><br />
 
                 <!-- Botón para enviar -->
