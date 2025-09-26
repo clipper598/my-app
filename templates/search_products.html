@@ -147,6 +147,40 @@
 </style>
 <body>
 <div class="col-sm-12">
+  <div>
+        <div class="bgMorado  centrado" style="height: 130px;">
+          <br />
+            <img src="/static/titas.jpg" class="imagen-redondeada"> &nbsp;
+            <label class="titulosEncabezado"> Tita's Toys</label>
+        </div>
+
+         <!-- Div Menu navegacion -->
+         <div class="izquierdo">
+          <table>
+            <tr>
+              <td>
+                <form action="/menu" method="POST">
+                  <input type="hidden" name="menuNavegacion" id="menuNavegacion" value="0">
+                  <button type="submit" class="btn btn-sm btnNavegacion" id="btnMenuAlta"><i class="fa fa-cog fa-2x titulos"></i> 
+                  <label class="titulos"> Men&uacute;</label>
+                  </button>
+                </form>
+              </td>
+              <td style="width: 10px;"> </td>
+              <td>
+                <form action="/altaInventario" method="POST">
+                  <input type="hidden" name="menuAlta" id="menuAlta" value="0">
+                  <button type="submit" class="btn btnMorado" id="btnMenuAlta"><i class="fa fa-plus fa-2x titulos"></i> 
+                      <label class="titulosBotones"> Agregar</label>
+                  </button>
+                </form>
+              </td>
+              </tr>
+            </table>
+        </div>
+  </div>
+</div>
+<div class="col-sm-12">
     <br /><br />
     <!-- Consulta de inventario -->
     <table class="table table-bordered display" id="tblProducts">
@@ -208,6 +242,7 @@
         </tbody>
     </table>
 </div>
+    
 
     <script>
       $(document).ready(function(){
@@ -221,11 +256,12 @@
         $('#tblProducts').DataTable({
             paging: true,        // Habilita la paginación
             searching: true,     // Habilita el filtro de búsqueda
+           // ordering: true,      // Habilita la ordenación de columnas
             lengthMenu: [10, 25, 50], // Opciones de cantidad de filas por página
             language: {
                 search: "Buscar:", // Traducción del campo de búsqueda
-                lengthMenu: "Mostrar _MENU_ registros por página",
-                info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                lengthMenu: "Mostrar _MENU_",
+                info: "_START_ a _END_ de _TOTAL_ registros",
                 paginate: {
                     first: "Primero",
                     last: "Último",
