@@ -108,6 +108,11 @@
                     <button type="submit" class="btn btnMorado buttonTitle btn-lg" id="btnMenuConsulta"><i class="fa fa-search fa-5x titulos"></i> 
                     <label class="titulos"> Consulta de Productos</label>
                     </button>
+                    <br /><br />
+                    <input type="hidden" name="menuConsulta" id="menuConsultaVentas" value="0">
+                    <button type="submit" class="btn btnMorado buttonTitle btn-lg" id="btnMenuConsultaVentas"><i class="fa fa-dollar fa-5x titulos"></i> 
+                    <label class="titulos">Ventas</label>
+                    </button>
                 </form>
             </div>
             <br /><br />
@@ -128,6 +133,14 @@
         $(document).ready(function() {
             $('#btnMenuConsulta').on('click', function() {
                 $(menuConsulta).val(2); 
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#btnMenuConsultaVentas').on('click', function() {
+                $(menuConsulta).val(3); 
             });
         });
     </script>

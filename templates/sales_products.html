@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Titas Toys</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+  <style>
+    body {
+        background-color: #fcf4dd;
+        font-family: Helvetica, Arial, sans-serif;
+    }
+    .titulos {
+      font-size: 25px;
+      text-align: center;
+      color: #004a77ff;
+      font-weight: bold;
+  }
+
+  .titulosBotones {
+    font-size: 18px;
+    color: #fff;
+    font-weight: bold;
+}
+    
+    .inputsMedianos{
+
+      border-radius: 10px;
+      border-color: #004a77ff;
+      border-solid: 4px;
+      height: 60%;
+  }
+
+    .data {
+        font-size: 16px;
+        text-align: left;
+        color: #000000;
+    }
+
+    body {
+      background-color: #fbdbf0;
+      font-family: Helvetica, Arial, sans-serif;
+  }
+
+  .labelTd{
+    font-size: 22px;
+    text-align: left;
+    color: #000;
+}
+
+  .data {
+      font-size: 23px;
+      text-align: left;
+      color: #000000;
+  }
+
+  .buttonTitle{
+      font-size: 23px;
+  }
+
+  .titulosEncabezado {
+    font-size: 30px;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+}
+.titulos {
+    font-size: 18px;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+}
+
+.labels {
+  font-size: 18px;
+  text-align: center;
+  color: #943D73;
+  font-weight: bold;
+}
+
+.centrado{
+text-align: center;
+}
+
+.izquierdo{
+    text-align: left;
+
+    }
+
+.bgMorado{
+    background-color: #e20099;
+}
+
+.bgMoradoMedio{
+  background-color: #eb54ba;
+}
+
+.btnMorado{
+    background-color: #943D73;
+}
+
+.btnNavegacion{
+  background-color: #e733ad;
+  width: 120px;
+}
+
+.msgProcesoSuccess{
+  color:aquamarine;
+  font-weight:bold;
+  color: #fff;
+  background-color: #8ee3f1;
+}
+
+.imagen-redondeada {
+  border-radius: 25px; /* Redondea las esquinas */
+  width: 100px; /* Ancho de la imagen */
+  height: 80px;
+}
+
+</style>
+  <body>
+    <div class="panel panel-info col-sm-12">
+        <div class="bgMorado  centrado" style="height: 130px;">
+          <br /><br />
+            <img src="/static/titas.jpg"  class="imagen-redondeada"> &nbsp;
+            <label class="titulosEncabezado"> Tita's Toys</label>
+        </div>
+        <!-- Div Menu navegacion -->
+        <div class="izquierdo">
+          <form action="/consultaInventario" method="POST">
+            <button type="submit" class="btn btnMorado titulosBotones" id="btnMenuAlta"><i class="fa fa-arrow-circle-left fa-2x titulos"></i> 
+                <label class="titulos"> Regresar</label>
+            </button>
+           </form>
+        </div>
+
+      <div class="panel-body">
+        <label class="labels"><h3> Venta de Producto</h3></label>
+      <br />
+      <div class="col-sm-2"></div>
+      <!-- Formulario para entrada de datos -->
+      <div class="panel panel-info  col-sm-8">
+        <form action="/ventaInventario" method="post">
+
+        <!-- Código de barras -->
+        <input type="text"  class="form-control data inputsMedianos" id="id_product" name="id_product" required value="{{id_product}}" readonly/>
+        <label for="barcode" class="labels"><h4>Código de barras:</h4></label>
+        <input type="text"  class="form-control data inputsMedianos" id="barcode" name="barcode" required value="{{barcode}}" readonly/>
+        <br /><br />
+
+         <!-- Descricpcion producto -->
+         <label for="barcode" class="labels"><h4>Nombre del producto:</h4></label>
+         <input type="text"  class="form-control data inputsMedianos" id="product_name" name="product_name"  required value="{{product_name}}" readonly/>
+         <br /><br />
+
+        <!-- Cantidad con spinner -->
+        <label for="quantity" class="labels"><h4>Cantidad:</h4></label>
+        <input type="number" class="form-control data inputsMedianos" id="quantity" name="quantity" min="1"  required value="{{quantity}}" size="6"/>
+        <br /><br />
+
+        <!-- Precio -->
+        <label for="price" class="labels"><h4>Precio: $</h4></label>
+        <input type="number" class="form-control data inputsMedianos" id="price" name="price" required value="{{price}}" size="2"/>
+        <br /><br />
+
+        <!-- Botón para actualizar -->
+        <div style="text-align: right;">
+          <button type="submit" class="btn btnMorado titulosBotones"> 
+            <input type="hidden" name="menuActualiza" value="1">
+            <i class="fa fa-check" aria-hidden="true"></i> &nbsp; Venta
+          </button>
+        </div>
+        <br /><br />
+        <div style="text-align: left;">
+          <label> <h2 class="text-success"> {{descAct}} <h2/> <label/>
+        </div>
+        <br /><br />
+      </form>
+      <br /><br />
+    </div>
+    <div class="col-sm-2"></div>
+
+    </div>
+  </body>
+</html>
