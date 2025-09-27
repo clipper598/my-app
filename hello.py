@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
+from datetime import  datetime
 from configDb import *
 app =  Flask(__name__)
 
@@ -150,9 +151,74 @@ def menuController():
         menuAlta = request.form.get('menuAlta')
         menuConsulta = request.form.get('menuConsulta')
         if menuAlta == '1':
-            #print("Entro aca alta: " + menuAlta)
             return redirect("/altaInventario");
         if menuConsulta == '2':
-            #print("Entro aca consulta: " + menuConsulta)
             return redirect("/consultaInventario");   
+        if menuConsulta == '3':
+            #print("Entro aca consulta: " + menuConsulta)
+            return redirect("/consultaVentaInventario");   
     return render_template('menu.html');
+
+#ventaInventario
+@app.route('/ventaInventario' , methods=['GET', 'POST'])
+def ventaInventario():
+    print("entre al ventaInventario ");
+    menuActualiza = request.form.get('menuActualiza');
+ 
+    print("QUE LLEVA EL MENU ACTUALIZA: "  + menuActualiza);
+      
+    if menuActualiza == '0':
+        barcode = request.form.get('codigoBarras');
+        price = request.form.get('precio');
+        id_product = request.form.get('id_product');
+        quantity = request.form.get('cantidad');
+        product_name = request.form.get('nombreProducto');
+        url_img_product=request.form.get('url_img_product');
+        
+        print("voy a vender :" + menuActualiza + ", " + barcode + ", " + price + ", " + quantity + ", " + product_name + ", " + id_product);
+        return render_template('sales_products.html', id_product = id_product, barcode = barcode, price = price, quantity = quantity, product_name = product_name);
+    elif menuActualiza == '1':
+            barcode = request.form.get('barcode');
+            price = request.form.get('price');
+            id_product = request.form.get('id_product');
+            quantity = request.form.get('quantity');
+            product_name = request.form.get('product_name');
+            date_sale =  datetime.now().strftime('%Y-%m-%d');
+            comments = '';
+            print(id_product); 
+            print("2-. Act :" + menuActualiza);
+            #print(id_product +  ", " + barcode + ", " + product_name + ", " + quantity + ", " + price + ", " + date_sale + ", " + comments);
+            conexion_MySQLdb = conectionDB()
+            cursor = conexion_MySQLdb.cursor()  
+            try:
+                cursor.execute(
+                    "INSERT INTO products_sales_tita (id_product, barcode, product_name, quantity, price, date_sale, comments) VALUES (%s, %s, %s, %s, %s, %s, %s)", 
+                    (id_product, barcode, product_name, quantity, price, date_sale, comments)
+                )
+                conexion_MySQLdb.commit()
+            finally:
+                cursor.close()
+            conexion_MySQLdb.close()
+            descAct = "Producto Vendido"
+            return render_template('sales_products.html', id_product = id_product, barcode = barcode, price = price, quantity = quantity, product_name = product_name, descAct=descAct);
+                     
+    else:
+        return redirect("/consultaInventario"); 
+    
+#consultaInventario
+@app.route('/consultaVentaInventario',methods=['GET', 'POST'])
+def consultaVentaInventario():
+    #print(request.form);
+    products = []
+    conexion_MySQLdb = conectionDB()
+        
+    cursor = conexion_MySQLdb.cursor()
+    try:
+        cursor.execute("SELECT barcode, product_name, quantity, price, date_sale  FROM products_sales_tita order by date_sale desc")
+        products = cursor.fetchall()
+        #print(products)
+    finally:
+        cursor.close()
+    conexion_MySQLdb.close()
+      
+    return render_template('sales_search_products.html', products = products);
