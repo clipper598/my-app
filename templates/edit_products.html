@@ -53,10 +53,16 @@
 }
 
   .data {
-      font-size: 23px;
+      font-size: 16px;
       text-align: left;
       color: #000000;
   }
+
+  .dataMedium {
+    font-size: 18px;
+    text-align: left;
+    color: #000000;
+}
 
   .buttonTitle{
       font-size: 23px;
@@ -132,7 +138,7 @@ text-align: center;
         <!-- Div Menu navegacion -->
         <div class="izquierdo">
           <form action="/consultaInventario" method="POST">
-            <button type="submit" class="btn btn-sm btnNavegacion" id="btnMenuAlta"><i class="fa fa-arrow-circle-left fa-2x titulos"></i> 
+            <button type="submit" class="btn btn-sm btnMorado" id="btnMenuAlta"><i class="fa fa-arrow-circle-left fa-2x titulos"></i> 
                 <label class="titulos"> Regresar</label>
             </button>
            </form>
@@ -159,12 +165,12 @@ text-align: center;
 
         <!-- Cantidad con spinner -->
         <label for="quantity" class="labels"><h4>Cantidad:</h4></label>
-        <input type="number" class="form-control data inputsMedianos" id="quantity" name="quantity" min="1"  required value="{{quantity}}" size="6"/>
+        <input type="number" class="form-control dataMedium inputsMedianos" id="quantity" name="quantity" min="1"  required value="{{quantity}}" size="6"/>
         <br /><br />
 
         <!-- Precio -->
         <label for="price" class="labels"><h4>Precio: $</h4></label>
-        <input type="number" class="form-control data inputsMedianos" id="price" name="price" required value="{{price}}" size="2"/>
+        <input type="number" class="form-control dataMedium inputsMedianos" id="price" name="price" required value="{{price}}" size="2"/>
         <br /><br />
 
             <!-- Precio -->
@@ -175,7 +181,7 @@ text-align: center;
         <div style="text-align: right;">
           <button type="submit" class="btn btnMorado titulosBotones"> 
             <input type="hidden" name="menuActualiza" value="1">
-            <i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Actualizar
+            <i class="fa fa-check" aria-hidden="true"></i> &nbsp; Actualizar
           </button>
         </div>
         <br /><br />
