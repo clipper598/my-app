@@ -55,9 +55,9 @@
 }
 
 .labelTdDescProducto{
-  font-size: 16px;
+  font-size: 18px;
   text-align: left;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .labelButtonsMenu{
@@ -90,7 +90,7 @@
 }
 
 .titulosStockLabel {
-  font-size: 14px;
+  font-size: 16px;
 }
 
   .centrado{
@@ -151,7 +151,7 @@
 }
 .imgTamanioProducto{
   width: 100%; /* Abarca el 100% del ancho del contenedor */
-  height: 100%; /* Abarca el 100% de la altura del contenedor */
+  height: auto; /* Abarca el 100% de la altura del contenedor */
   object-fit: cover; 
 }
 
@@ -215,7 +215,7 @@
                     <span class="labelTdPrecio">$ &nbsp; {{product[4]}}</span>
                     <br />
                     <span class="titulosStockLabel">Stock: &nbsp;
-                        <label style="font-weight: bold; size: 19px;" class="titulosStock">{{product[3]}}</label>
+                        <label style="font-weight: bold; size: 20px;" class="titulosStock">{{product[3]}}</label>
                     </span>
                     <br />
                     <div style="text-align: left">
@@ -235,7 +235,7 @@
                                         </button>
                                     </form>
                                 </td>
-                                <td style="width: 10px;">&nbsp; &nbsp;</td>
+                                <td style="width: 10px;">&nbsp;</td>
                                 <td>
                                     <form action="/eliminaInventario" method="post">
                                         <input type="hidden" name="id" value="{{product[0]}}">
@@ -244,7 +244,7 @@
                                         </button>
                                     </form>
                                 </td>
-                                <td style="width: 10px;">&nbsp; &nbsp;</td>
+                                <td style="width: 10px;">&nbsp;</td>
                                 <td>
                                   <form action="/ventaInventario" method="post">
                                       <input type="hidden" name="id_product" value="{{product[0]}}">
@@ -283,11 +283,12 @@
             searching: true,     // Habilita el filtro de búsqueda
             stateSave: true,    // Guarda el estado de la tabla (página, búsqueda, etc.)
            // ordering: true,      // Habilita la ordenación de columnas
-            lengthMenu: [10, 25, 50], // Opciones de cantidad de filas por página
+            lengthMenu: [15, 25, 50], // Opciones de cantidad de filas por página
             language: {
                 search: "Buscar:", // Traducción del campo de búsqueda
                 lengthMenu: "Mostrar _MENU_",
-                info: "_START_ a _END_ de _TOTAL_ registros",
+                //info: "_START_ a _END_ de _TOTAL_ registros",
+                info: "_START_ de _TOTAL_ registros",
                 paginate: {
                     first: "Primero",
                     last: "Último",
