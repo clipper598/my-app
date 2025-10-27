@@ -48,7 +48,7 @@
 }
 
 .labelTdPrecio{
-  font-size: 23px;
+  font-size: 25px;
   text-align: left;
   color: #000;
   font-weight: bold;
@@ -140,19 +140,31 @@
     border-spacing: 20;
     border-radius: 5px;
      -moz-border-radius: 20px;
+    background-color: #fff;
 }
 
-.sombras {
-  padding: 20px;
-  box-shadow:
-    inset 0 -3em 3em rgba(0, 0, 0, 0.1),
-    0 0 0 2px rgb(255, 255, 255),
-    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+
+#tblProducts tbody tr {
+  background-color: white !important; /* Aplica fondo blanco a todas las filas */
 }
+
 .imgTamanioProducto{
   width: 100%; /* Abarca el 100% del ancho del contenedor */
   height: auto; /* Abarca el 100% de la altura del contenedor */
   object-fit: cover; 
+}
+
+.dataTables_wrapper .dataTables_filter {
+  text-align: left; /* Alinea el campo de búsqueda a la izquierda */
+}
+
+.dataTables_wrapper .dataTables_length {
+  text-align: left; /* Alinea el selector de cantidad de filas a la izquierda */
+}
+.img-fluid {
+  height: 100%; /* Abarca el 100% de la altura del contenedor */
+  width: auto; /* Mantiene la proporción de la imagen */
+  object-fit: cover; /* Ajusta la imagen para que llene el espacio */
 }
 
 </style>
@@ -190,11 +202,11 @@
             </table>
         </div>
   </div>
-</div>
-<div class="col-sm-12">
+
+<div>
     <br /><br />
     <!-- Consulta de inventario -->
-    <table class="table table-bordered display sombras" id="tblProducts">
+    <table class="table table-hover display" id="tblProducts">
         <thead style="text-align: center;">
             <tr class="headTr centrado">
                 <th></th>
@@ -204,8 +216,8 @@
         <tbody class="labelTd">
             {% for product in products %}
             <tr>
-                <td style="width: 120px; text-align: center; vertical-align: middle; background-color: #fff;">
-                    <img src="{{product[5]}}" class="img-fluid" width="110">
+                <td style="width: 120px;  height: 150px; text-align: center; vertical-align: middle; background-color: #fff;">
+                    <img src="{{product[5]}}" class="img-fluid">
                 </td>
                 <td>
                     <span class="labelTdMedium">SKU &nbsp; {{product[1]}}</span>
@@ -215,7 +227,7 @@
                     <span class="labelTdPrecio">$ &nbsp; {{product[4]}}</span>
                     <br />
                     <span class="titulosStockLabel">Stock: &nbsp;
-                        <label style="font-weight: bold; size: 20px;" class="titulosStock">{{product[3]}}</label>
+                        <label style="font-weight: bold; size: 22px;" class="titulosStock">{{product[3]}}</label>
                     </span>
                     <br />
                     <div style="text-align: left">
@@ -268,7 +280,7 @@
     </table>
 </div>
     
-
+</div>
     <script>
       $(document).ready(function(){
           $('#btnMenuAlta').on('click', function() {
@@ -279,11 +291,13 @@
     <script>
       $(document).ready(function() {
         $('#tblProducts').DataTable({
+           stripeClasses: [],
             paging: true,        // Habilita la paginación
             searching: true,     // Habilita el filtro de búsqueda
             stateSave: true,    // Guarda el estado de la tabla (página, búsqueda, etc.)
            // ordering: true,      // Habilita la ordenación de columnas
             lengthMenu: [15, 25, 50], // Opciones de cantidad de filas por página
+            pageLength: 15,
             language: {
                 search: "Buscar:", // Traducción del campo de búsqueda
                 lengthMenu: "Mostrar _MENU_",
@@ -292,8 +306,8 @@
                 paginate: {
                     first: "Primero",
                     last: "Último",
-                    next: "Siguiente",
-                    previous: "Anterior"
+                    next: "Sig",
+                    previous: "Ant"
                 }
             }
         });
