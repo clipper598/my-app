@@ -11,22 +11,23 @@
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script> 
   </head>
   <style>
-    body {
+  body {
         background-color: #fff;
         font-family: Helvetica, Arial, sans-serif;
-    }
-    .titulos {
+}
+
+.titulos {
         font-size: 18px;
         text-align: center;
         color: #fff;
         font-weight: bold;
-    }
+}
     
-    .headTr{
+.headTr{
       background-color: #eb54ba;
       text-align: center;
       color:#fff;
-    }
+}
 
 .titulosBotones {
       font-size: 18px;
@@ -34,58 +35,58 @@
       font-weight: bold;
 }
 
-    .labelTd{
+.labelTd{
       font-size: 20px;
       text-align: left;
       color: #000;
-  }
+}
 
-  .labelTdMedium{
-    font-size: 15px;
+.labelTdMedium{
+    font-size: 14px;
     text-align: left;
     color: #000;
 }
 
 .labelTdPrecio{
-  font-size: 22px;
+  font-size: 23px;
   text-align: left;
-  color: #4d7fc4;
+  color: #000;
   font-weight: bold;
 }
 
 .labelTdDescProducto{
   font-size: 16px;
   text-align: left;
-  font-weight: medium;
+  font-weight: 300;
 }
 
-  .labelButtonsMenu{
+.labelButtonsMenu{
     font-size: 28px;
     text-align: left;
     color: #fff;
 }
 
-    .data {
+.data {
         font-size: 23px;
         text-align: left;
         color: #000000;
-    }
+}
 
-    .buttonTitle{
-        font-size: 23px;
-    }
+.buttonTitle{
+  font-size: 23px;
+}
 
-    .titulosEncabezado {
-      font-size: 26px;
-      text-align: center;
-      color: #fff;
-      font-weight: bold;
+.titulosEncabezado {
+    font-size: 26px;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
   }
 
   .titulosStock {
     font-size: 16px;
     text-align: center;
-    color: #e20099;
+    color: #218343;
 }
 
 .titulosStockLabel {
@@ -118,6 +119,16 @@
       background-color: #943D73;
   }
 
+  .divBotonesAcciones{
+    background-color: #FAE6FA;
+  }
+
+  .botonesAcciones{
+    background-color: #F7CDF7;
+    color: #943D73;
+    border-radius: 2px 4px 2px;
+  }
+
   .imagen-redondeada {
     border-radius: 25px; /* Redondea las esquinas */
     width: 100px; /* Ancho de la imagen */
@@ -139,10 +150,11 @@
     0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
 .imgTamanioProducto{
-  height: auto;
-  display: flex;
-  align-items: center;
+  width: 100%; /* Abarca el 100% del ancho del contenedor */
+  height: 100%; /* Abarca el 100% de la altura del contenedor */
+  object-fit: cover; 
 }
+
 </style>
 <body>
 <div class="col-sm-12">
@@ -182,7 +194,7 @@
 <div class="col-sm-12">
     <br /><br />
     <!-- Consulta de inventario -->
-    <table class="table table-bordered display" id="tblProducts">
+    <table class="table table-bordered display sombras" id="tblProducts">
         <thead style="text-align: center;">
             <tr class="headTr centrado">
                 <th></th>
@@ -191,7 +203,7 @@
         </thead>
         <tbody class="labelTd">
             {% for product in products %}
-            <tr class="sombras">
+            <tr>
                 <td style="width: 120px; text-align: center; vertical-align: middle; background-color: #fff;">
                     <img src="{{product[5]}}" class="img-fluid imgTamanioProducto" width="110">
                 </td>
@@ -202,15 +214,14 @@
                     <br />
                     <span class="labelTdPrecio">$ &nbsp; {{product[4]}}</span>
                     <br />
-                    <span class="titulosStockLabel">queda(n): &nbsp;
-                        <label style="font-weight: bold; size: 18px;" class="titulosStock">{{product[3]}}</label>
-                        &nbsp; en stock
+                    <span class="titulosStockLabel">Stock: &nbsp;
+                        <label style="font-weight: bold; size: 19px;" class="titulosStock">{{product[3]}}</label>
                     </span>
                     <br />
                     <div style="text-align: left">
                         <table>
                             <tr>
-                                <td>
+                                <td >
                                     <form action="/actualizarInventario" method="post">
                                         <input type="hidden" name="id" value="{{product[0]}}">
                                         <input type="hidden" name="codigoBarras" value="{{product[1]}}">
@@ -219,21 +230,21 @@
                                         <input type="hidden" name="precio" value="{{product[4]}}">
                                         <input type="hidden" name="url_img_product" value="{{product[5]}}">
                                         <input type="hidden" name="menuActualiza" value="0">
-                                        <button type="submit" class="btn btn-primary" id="update-product">
+                                        <button type="submit" class="btn botonesAcciones" id="update-product">
                                             <i class="fa fa-pencil"></i>
                                         </button>
                                     </form>
                                 </td>
-                                <td style="width: 15px;">&nbsp; &nbsp;</td>
+                                <td style="width: 10px;">&nbsp; &nbsp;</td>
                                 <td>
                                     <form action="/eliminaInventario" method="post">
                                         <input type="hidden" name="id" value="{{product[0]}}">
-                                        <button type="submit" class="btn btn-danger" id="delete-product">
+                                        <button type="submit" class="btn botonesAcciones" id="delete-product">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </form>
                                 </td>
-                                <td style="width: 15px;">&nbsp; &nbsp;</td>
+                                <td style="width: 10px;">&nbsp; &nbsp;</td>
                                 <td>
                                   <form action="/ventaInventario" method="post">
                                       <input type="hidden" name="id_product" value="{{product[0]}}">
@@ -242,7 +253,7 @@
                                       <input type="hidden" name="cantidad" value="{{product[3]}}">
                                       <input type="hidden" name="precio" value="{{product[4]}}">
                                       <input type="hidden" name="menuActualiza" value="0">
-                                      <button type="submit" class="btn btn-success" id="sale-product">
+                                      <button type="submit" class="btn botonesAcciones" id="sale-product">
                                           <i class="fa fa-dollar"></i>
                                       </button>
                                   </form>
