@@ -48,14 +48,14 @@
 }
 
 .labelTdPrecio{
-  font-size: 25px;
+  font-size: 24px;
   text-align: left;
   color: #000;
   font-weight: bold;
 }
 
 .labelTdDescProducto{
-  font-size: 18px;
+  font-size: 17px;
   text-align: left;
   font-weight: 400;
 }
@@ -90,7 +90,7 @@
 }
 
 .titulosStockLabel {
-  font-size: 18px;
+  font-size: 16px;
 }
 
   .centrado{
@@ -218,7 +218,7 @@
             {% for product in products %}
             <tr>
                 <td style="width: 120px;  height: 150px; text-align: center; vertical-align: middle; background-color: #fff;">
-                    <img src="{{product[5]}}" class="img-fluid">
+                    <img src="{{product[5]}}" class="img-fluid" style="max-width: 100%; height: auto;">
                 </td>
                 <td class="card">
                     <span class="labelTdMedium">SKU &nbsp; {{product[1]}}</span>
@@ -228,7 +228,7 @@
                     <span class="labelTdPrecio">$ &nbsp; {{product[4]}}</span>
                     <br />
                     <span class="titulosStockLabel">Stock: &nbsp;
-                        <label style="font-weight: bold; size: 22px;" class="titulosStock">{{product[3]}}</label>
+                        <label style="font-weight: bold; size: 20px;" class="titulosStock">{{product[3]}}</label>
                     </span>
                     <br />
                     <div style="text-align: left">
@@ -248,7 +248,7 @@
                                         </button>
                                     </form>
                                 </td>
-                                <td style="width: 10px;">&nbsp;</td>
+                                <td style="width: 5px;">&nbsp;</td>
                                 <td>
                                     <form action="/eliminaInventario" method="post">
                                         <input type="hidden" name="id" value="{{product[0]}}">
@@ -257,7 +257,7 @@
                                         </button>
                                     </form>
                                 </td>
-                                <td style="width: 10px;">&nbsp;</td>
+                                <td style="width: 5px;">&nbsp;</td>
                                 <td>
                                   <form action="/ventaInventario" method="post">
                                       <input type="hidden" name="id_product" value="{{product[0]}}">
