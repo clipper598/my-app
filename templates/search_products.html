@@ -90,7 +90,7 @@
 }
 
 .titulosStockLabel {
-  font-size: 16px;
+  font-size: 18px;
 }
 
   .centrado{
@@ -189,7 +189,7 @@
                   </button>
                 </form>
               </td>
-              <td style="width: 10px;"> </td>
+              <td style="width: 5px;"> </td>
               <td>
                 <form action="/altaInventario" method="POST">
                   <input type="hidden" name="menuAlta" id="menuAlta" value="0">
@@ -213,13 +213,13 @@
                 <th>Producto</th>
             </tr>
         </thead>
-        <tbody class="labelTd">
+        <tbody class="labelTd card">
             {% for product in products %}
             <tr>
                 <td style="width: 120px;  height: 150px; text-align: center; vertical-align: middle; background-color: #fff;">
                     <img src="{{product[5]}}" class="img-fluid">
                 </td>
-                <td>
+                <td class="card">
                     <span class="labelTdMedium">SKU &nbsp; {{product[1]}}</span>
                     <br />
                     <label class="labelTdDescProducto">{{product[2]}}</label>
@@ -283,6 +283,7 @@
 </div>
     <script>
       $(document).ready(function(){
+
           $('#btnMenuAlta').on('click', function() {
               $(menuAlta).val(1); 
           });

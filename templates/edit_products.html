@@ -146,37 +146,40 @@ text-align: center;
 
       <div class="panel-body">
         <label class="labels"><h3> Actualizar Producto</h3></label>
-      <br />
+        <br />
+        <div style="display: none;">
+          <label> <h3 class="text-success"> {{descAct}} <h3/> <label/>
+        </div>
       <div class="col-sm-2"></div>
       <!-- Formulario para entrada de datos -->
       <div class="panel panel-info  col-sm-8">
         <form action="/actualizarInventario" method="post">
-
+         
         <input type="hidden"  class="form-control data inputsMedianos" id="id" name="id" required value="{{id}}" readonly/>
         <!-- Código de barras -->
         <label for="barcode" class="labels"><h4>Código de barras:</h4></label>
         <input type="text"  class="form-control data inputsMedianos" id="barcode" name="barcode" required value="{{barcode}}" readonly/>
-        <br /><br />
+        <br />
 
          <!-- Descricpcion producto -->
          <label for="barcode" class="labels"><h4>Nombre del producto:</h4></label>
          <input type="text"  class="form-control data inputsMedianos" id="product_name" name="product_name"  required value="{{product_name}}"/>
-         <br /><br />
+         <br />
 
         <!-- Cantidad con spinner -->
         <label for="quantity" class="labels"><h4>Cantidad:</h4></label>
         <input type="number" class="form-control dataMedium inputsMedianos" id="quantity" name="quantity" min="1"  required value="{{quantity}}" size="6"/>
-        <br /><br />
+        <br />
 
         <!-- Precio -->
         <label for="price" class="labels"><h4>Precio: $</h4></label>
         <input type="number" class="form-control dataMedium inputsMedianos" id="price" name="price" required value="{{price}}" size="2"/>
-        <br /><br />
+        <br />
 
             <!-- Precio -->
             <label for="urlImagen" class="labels"><h4>Url Imagen</h4></label>
             <input type="text" class="form-control data inputsMedianos" id="url_img_product" name="url_img_product" required value="{{url_img_product}}" >
-            <br /><br />
+            <br />
         <!-- Botón para actualizar -->
         <div style="text-align: right;">
           <button type="submit" class="btn btnMorado titulosBotones"> 
@@ -185,15 +188,19 @@ text-align: center;
           </button>
         </div>
         <br /><br />
-        <div style="text-align: left;">
-          <label> <h2 class="text-success"> {{descAct}} <h2/> <label/>
-        </div>
-        <br /><br />
       </form>
       <br /><br />
     </div>
     <div class="col-sm-2"></div>
 
     </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          const descAct = "{{descAct}}"; // Obtiene el valor de la variable
+          if (descAct) { // Verifica si tiene un valor asignado
+              alert(descAct); // Muestra el valor en un alert
+          }
+      });
+  </script>
   </body>
 </html>
