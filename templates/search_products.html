@@ -210,7 +210,7 @@
     <table class="table table-hover display" id="tblProducts" style="width: 100%;">
         <thead style="text-align: center;">
             <tr class="headTr centrado">
-                <th>SKU</th>
+                <th></th>
                 <th>Producto</th>
             </tr>
         </thead>
@@ -218,20 +218,22 @@
             {% for product in products %}
             <tr>
                 <td style="width: 100px;  height: 140px; text-align: center; vertical-align: middle;">
-                  <span class="labelTdMedium">{{product[1]}}</span>
-                  <br />
+                  
                   <img src="{{product[5]}}" class="img-fluid">
+                  <br />
+                  <label class="labelTdDescProducto">{{product[2]}}</label>
+                  <br />
+                  <span class="labelTdPrecio">$ &nbsp; {{product[4]}}</span>
+                  
                 </td>
                 <td class="card">
-                    <label class="labelTdDescProducto">{{product[2]}}</label>
-                    <br />
-                    <span class="labelTdPrecio">$ &nbsp; {{product[4]}}</span>
-                    <br />
+                    <div style="text-align: left">
+                     <span class="labelTdMedium"> SKU&nbsp;{{product[1]}}</span>
+                      <br />
                     <span class="titulosStockLabel">Stock: &nbsp;
                         <label style="font-weight: bold; size: 20px;" class="titulosStock">{{product[3]}}</label>
                     </span>
                     <br />
-                    <div style="text-align: left">
                         <table class="table-responsive">
                             <tr>
                                 <td >
@@ -248,7 +250,8 @@
                                         </button>
                                     </form>
                                 </td>
-                                <td style="width: 5px;">&nbsp;</td>
+                              </tr>
+                              <tr>
                                 <td>
                                     <form action="/eliminaInventario" method="post">
                                         <input type="hidden" name="id" value="{{product[0]}}">
@@ -257,7 +260,8 @@
                                         </button>
                                     </form>
                                 </td>
-                                <td style="width: 5px;">&nbsp;</td>
+                              </tr>
+                              <tr> 
                                 <td>
                                   <form action="/ventaInventario" method="post">
                                       <input type="hidden" name="id_product" value="{{product[0]}}">
