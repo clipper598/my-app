@@ -42,7 +42,7 @@
 }
 
 .labelTdMedium{
-    font-size: 14px;
+    font-size: 13px;
     text-align: left;
     color: #000;
 }
@@ -210,19 +210,19 @@
     <table class="table table-hover display" id="tblProducts" style="width: 100%;">
         <thead style="text-align: center;">
             <tr class="headTr centrado">
-                <th></th>
+                <th>SKU</th>
                 <th>Producto</th>
             </tr>
         </thead>
         <tbody class="labelTd card">
             {% for product in products %}
             <tr>
-                <td style="width: 120px;  height: 150px; text-align: center; vertical-align: middle; background-color: #fff;">
-                    <img src="{{product[5]}}" class="img-fluid">
+                <td style="width: 100px;  height: 140px; text-align: center; vertical-align: middle;">
+                  <span class="labelTdMedium">{{product[1]}}</span>
+                  <br />
+                  <img src="{{product[5]}}" class="img-fluid">
                 </td>
                 <td class="card">
-                    <span class="labelTdMedium">SKU &nbsp; {{product[1]}}</span>
-                    <br />
                     <label class="labelTdDescProducto">{{product[2]}}</label>
                     <br />
                     <span class="labelTdPrecio">$ &nbsp; {{product[4]}}</span>
@@ -232,7 +232,7 @@
                     </span>
                     <br />
                     <div style="text-align: left">
-                        <table>
+                        <table class="table-responsive">
                             <tr>
                                 <td >
                                     <form action="/actualizarInventario" method="post">
