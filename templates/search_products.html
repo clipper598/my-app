@@ -42,7 +42,7 @@
 }
 
 .labelTdMedium{
-    font-size: 12px;
+    font-size: 11px;
     text-align: left;
     color: #000;
 }
@@ -56,8 +56,9 @@
 
 .labelTdDescProducto{
   font-size: 15px;
-  text-align: left;
+  text-align: center;
   font-weight: 500;
+
 }
 
 .labelButtonsMenu{
@@ -85,12 +86,18 @@
 
   .titulosStock {
     font-size: 17px;
-    text-align: center;
-    color: #218343;
-}
+  }
 
 .titulosStockLabel {
   font-size: 14px;
+  background-color: #EFF7E9;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border-radius: 2px 2px 2px 2px;
+  text-align: center;
+  color: #218343;
 }
 
   .centrado{
@@ -171,7 +178,7 @@
 <body>
 <div class="col-sm-12">
   <div>
-        <div class="bgMorado  centrado" style="height: 125px;">
+        <div class="bgMorado  centrado" style="height: 110px;">
           <br />
             <img src="/static/titas.jpg" class="imagen-redondeada"> &nbsp;
             <label class="titulosEncabezado"> Tita's Toys</label>
@@ -225,7 +232,7 @@
                   <br /> 
                   <label class="labelTdDescProducto">{{product[2]}}</label>
                   <br />
-                  <span class="titulosStockLabel">
+                  <span class="titulosStockLabel"> 
                     Stock: &nbsp; <label style="font-weight: bold; size: 20px;" class="titulosStock">{{product[3]}}</label>
                   </span>
                   <br />
