@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Titas Toys</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-..." crossorigin="anonymous" referrerpolicy="no-referrer">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script> 
+  </head>
+  <style>
+  body {
+        background-color: #fff;
+        font-family: Helvetica, Arial, sans-serif;
+}
+
+.titulos {
+        font-size: 14px;
+        text-align: center;
+        color: #fff;
+        font-weight: bold;
+}
+    
+.headTr{
+      background-color: #eb54ba;
+      text-align: center;
+      color:#fff;
+}
+
+.titulosBotones {
+      font-size: 14px;
+      color: #fff;
+      font-weight: bold;
+}
+
+.labelTd{
+      font-size: 20px;
+      text-align: left;
+      color: #000;
+}
+
+.labelTdMedium{
+    font-size: 11px;
+    text-align: left;
+    color: #000;
+}
+
+.labelTdPrecio{
+  font-size: 22px;
+  text-align: left;
+  color: #000;
+  font-weight: bold;
+}
+
+.labelTdDescProducto{
+  font-size: 15px;
+  text-align: center;
+  font-weight: 500;
+
+}
+
+.labelButtonsMenu{
+    font-size: 28px;
+    text-align: left;
+    color: #fff;
+}
+
+.data {
+        font-size: 23px;
+        text-align: left;
+        color: #000000;
+}
+
+.buttonTitle{
+  font-size: 23px;
+}
+
+.titulosEncabezado {
+    font-size: 24px;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+  }
+
+  .titulosStock {
+    font-size: 20px;
+  }
+
+.titulosStockLabel {
+  font-size: 12px;
+  background-color: #EFF7E9;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  border-radius: 2px 2px 2px 2px;
+  text-align: center;
+  color: #218343;
+}
+
+  .centrado{
+  text-align: center;
+  }
+
+  .izquierdo{
+      text-align: left;
+
+      }
+
+  .bgMorado{
+      background-color: #e20099;
+  }
+
+  .bgMoradoMedio{
+    background-color: #eb54ba;
+  }
+
+  .btnNavegacion{
+    background-color: #e733ad;
+    width: 120px;
+  }
+
+  .btnMorado{
+      background-color: #943D73;
+  }
+
+  .divBotonesAcciones{
+    background-color: #FAE6FA;
+  }
+
+  .botonesAcciones{
+    background-color: #F7CDF7;
+    color: #943D73;
+    border-radius: 2px 4px 2px;
+  }
+
+  .imagen-redondeada {
+    border-radius: 25px; /* Redondea las esquinas */
+    width: 100px; /* Ancho de la imagen */
+    height: 80px;
+  }
+
+  #tblProducts{
+    border-collapse: separate;
+    border-spacing: 20;
+    border-radius: 5px;
+     -moz-border-radius: 20px;
+    background-color: #fff;
+}
+
+
+#tblProducts tbody tr {
+  background-color: white !important; /* Aplica fondo blanco a todas las filas */
+}
+
+.imgTamanioProducto{
+  width: 100%; /* Abarca el 100% del ancho del contenedor */
+  height: 120px; /* Abarca el 100% de la altura del contenedor */
+  object-fit: cover; 
+}
+
+.dataTables_wrapper .dataTables_filter {
+  text-align: left; /* Alinea el campo de búsqueda a la izquierda */
+}
+
+.dataTables_wrapper .dataTables_length {
+  text-align: left; /* Alinea el selector de cantidad de filas a la izquierda */
+}
+.img-fluid {
+  height: 100%; /* Abarca el 100% de la altura del contenedor */
+  width: auto; /* Mantiene la proporción de la imagen */
+  object-fit: cover; /* Ajusta la imagen para que llene el espacio */
+}
+
+</style>
+<body>
+<div class="col-sm-12">
+  <div>
+        <div class="bgMorado  centrado" style="height: 110px;">
+          <br />
+            <img src="/static/titas.jpg" class="imagen-redondeada"> &nbsp;
+            <label class="titulosEncabezado"> Tita's Toys</label>
+        </div>
+
+         <!-- Div Menu navegacion -->
+         <div class="izquierdo">
+          <table>
+            <tr>
+              <td>
+                <form action="/ofertas" method="POST">
+                  <input type="hidden" name="productName" id="productName" value="">
+                  <button type="submit" class="btn btnMorado" id="btnMenuAlta"><i class="fa fa-reply fa-2x titulos"></i> 
+                  <label class="titulos"> Men&uacute;</label>
+                  </button>
+                </form>
+              </td>
+              <td style="width: 5px;"> </td>
+              </tr>
+            </table>
+        </div>
+  </div>
+
+<div>
+  <div class="panel-body" id="divPanelBody">
+    <!-- Formulario para entrada de datos -->
+    <div class="panel panel-info col-sm-12">
+      <label class="labels"><h3>Buscar ofertas</h3></label> &nbsp; 
+      <br />
+      <form action="/ofertasById" method="post">
+      
+        <!-- Nombre del producto -->
+        <label for="product-id" class="labels"><h4>Id del producto:</h4></label>
+        <input type="text" class="form-control data inputsMedianos" id="product-id" name="product-id" required value="" />
+        <br />
+
+        <!-- Botón para enviar -->
+        <div style="text-align: right;">
+          <button type="submit" class="btn btnMorado titulosBotones"><i class="fa fa-search" aria-hidden="true"></i> &nbsp; Buscar</button>
+        </div> <!-- Botón para enviar -->
+      </form>
+      <br /><br />
+    </div> <!-- fin div Formulario para entrada de datos -->
+  </div> <!-- fin divPanelBody -->
+
+    <br /><br />
+    <!-- Consulta de inventario -->
+    <div class="table-responsive">
+<table class="table table-hover display" id="tblProducts" style="width: 100%;">
+  <thead style="text-align: center;">
+    <tr class="headTr centrado">
+      <th>Producto</th>
+      <th>Acci&oacute;n</th>
+    </tr>
+  </thead>
+  <tbody class="labelTd card">
+    {% for offer in offers %}
+    <tr>
+      <td>
+
+        <br />
+        <span class="labelTdPrecio">$ &nbsp; {{offer.price}} &nbsp; {{offer.currency}}</span>
+        <br />
+        <label class="labelTdDescProducto">  {{ offer.seller }}</label>
+        <br />
+        <span class="labelTdMedium" style="display: none;">{{offer.seller_url}}</span>
+        <br />
+        <span class="labelTdMedium" style="display: none;">{{offer.stock}}</span>
+        <br />
+        <span class="labelTdMedium" style="display: none;">{{offer.delivery_info}}</span>
+      </td>
+      <td style="text-align: center; vertical-align: middle;">
+        <span class="titulosStock">
+          <a href="{{ offer.url }}" target="_blank">
+            <i class="fa fa-share" aria-hidden="true"></i>
+          </a>
+        </span>
+      </td>
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+  </div>
+</div>
+    
+</div>
+    <script>
+      $(document).ready(function() {
+        $('#tblProducts').DataTable({
+            resposive:true,
+            stripeClasses: [],
+            paging: true,        // Habilita la paginación
+            searching: true,     // Habilita el filtro de búsqueda
+            stateSave: true,    // Guarda el estado de la tabla (página, búsqueda, etc.)
+           // ordering: true,      // Habilita la ordenación de columnas
+            lengthMenu: [15, 25, 50], // Opciones de cantidad de filas por página
+            pageLength: 15,
+            language: {
+                search: "Filtrar:", // Traducción del campo de búsqueda
+                lengthMenu: "Mostrar _MENU_",
+                //info: "_START_ a _END_ de _TOTAL_ registros",
+                info: "_START_ de _TOTAL_ registros",
+                paginate: {
+                    first: "Primero",
+                    last: "Último",
+                    next: "Sig",
+                    previous: "Ant"
+                }
+            }
+        });
+    });
+  </script>
+  </body>
+</html>
