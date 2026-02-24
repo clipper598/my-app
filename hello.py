@@ -1,7 +1,12 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
+import requests
 from datetime import  datetime
 from configDb import *
 app =  Flask(__name__)
+
+
+# Tu API key de PricesAPI
+API_KEY = "pricesapi_UqgptyPtRfonJsOJMj4FHcPbBjW1Al"  # <--- reemplaza con tu clave real
 
 #altaInventario
 @app.route('/altaInventario' , methods=['GET', 'POST'])
@@ -222,3 +227,103 @@ def consultaVentaInventario():
     conexion_MySQLdb.close()
       
     return render_template('sales_search_products.html', products = products);
+
+# Busca ofertas por id
+@app.route("/ofertas", methods=['GET', 'POST'])
+def obtener_ofertas():
+    """
+    Devuelve el JSON de ofertas desde PricesAPI
+    Parámetro opcional: ?q=producto
+    """
+    product_name = request.form.get('productName')
+    print("---")
+    print(product_name)
+    print("---")
+
+  
+    if product_name is None or product_name.strip() == "":
+        return render_template('search_offers.html')
+         
+    else:
+            
+        if request.method == 'POST':
+            producto = request.args.get("q", product_name)  # default "iphone"
+            url = "https://api.pricesapi.io/api/v1/products/search"
+            params = {
+                "q": producto,
+                "country": "mx",
+                "api_key": API_KEY
+            }
+
+            response = requests.get(url, params=params)
+
+            if response.status_code == 200:
+                data = response.json()
+                # print(data["data"])  # Verifica la estructura real
+                products = []
+                results = data.get("data", {}).get("results", [])
+                for item in results:
+                    if "id" in item and "title" in item:
+                        products.append({
+                            "id": item["id"],
+                            "title": item["title"],
+                            "image": item["image"],
+                            "offerCount": item["offerCount"]
+                        })
+                print(products)
+                return render_template('search_offers.html', products=products)
+            else:
+                return jsonify({
+                    "error": "No se pudo obtener la data",
+                    "status_code": response.status_code
+                })
+                
+
+# Busca ofertas
+@app.route("/ofertasById", methods=['GET', 'POST'])
+def obtener_ofertasById():
+    """
+    Devuelve el JSON de ofertas desde PricesAPI
+    Parámetro opcional: ?q=producto
+    """
+    productId = request.form.get('product-id')
+    print("-- ofertasById --")
+    print(productId)
+    print("---")
+
+    if productId is None:
+        return render_template('search_offersById.html')
+    else:
+        if request.method == 'POST':
+            response = requests.get(
+                f'https://api.pricesapi.io/api/v1/products/{productId}/offers',
+                params={'country': 'mx'},
+                headers={'x-api-key': API_KEY}
+            )
+
+            data = response.json()
+            offers_data = data.get("data", {}).get("offers", [])
+            print(offers_data)
+            filtered_offers = []
+            for item in offers_data:
+                if (
+                    "seller" in item and
+                    "seller_url" in item and
+                    "price" in item and
+                    "currency" in item and
+                    "url" in item and
+                    "stock" in item and
+                    "delivery_info" in item
+                ):
+                    filtered_offers.append({
+                        "seller": item["seller"],
+                        "seller_url": item["seller_url"], 
+                        "price": float(item["price"]), 
+                        "currency": item["currency"], 
+                        "url": item["url"],
+                        "stock": item["stock"],
+                        "delivery_info": item["delivery_info"]
+                    })
+            # Ordenar por el precio más barato (ascendente)
+            filtered_offers = sorted(filtered_offers, key=lambda x: x["price"])           
+            return render_template('search_offersById.html', offers=filtered_offers)
