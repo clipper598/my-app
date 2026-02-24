@@ -205,7 +205,7 @@
 <div>
   <div class="panel-body" id="divPanelBody">
     <!-- Formulario para entrada de datos -->
-    <div class="panel panel-info col-sm-12">
+    <div class="panel panel-info col-sm-12" style="display: none;">
       <label class="labels"><h3>Buscar ofertas</h3></label> &nbsp; 
       <br />
       <form action="/ofertasById" method="post">
@@ -238,17 +238,15 @@
     {% for offer in offers %}
     <tr>
       <td>
-
-        <br />
         <span class="labelTdPrecio">$ &nbsp; {{offer.price}} &nbsp; {{offer.currency}}</span>
         <br />
         <label class="labelTdDescProducto">  {{ offer.seller }}</label>
         <br />
         <span class="labelTdMedium" style="display: none;">{{offer.seller_url}}</span>
         <br />
-        <span class="labelTdMedium" style="display: none;">{{offer.stock}}</span>
+        <span class="labelTdMedium">{{offer.stock}}</span>
         <br />
-        <span class="labelTdMedium" style="display: none;">{{offer.delivery_info}}</span>
+        <span class="labelTdMedium">Tipo de env&iacute;o: {{offer.delivery_info}}</span>
       </td>
       <td style="text-align: center; vertical-align: middle;">
         <span class="titulosStock">

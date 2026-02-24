@@ -55,7 +55,7 @@
 }
 
 .labelTdDescProducto{
-  font-size: 15px;
+  font-size: 14px;
   text-align: center;
   font-weight: 500;
 
@@ -237,7 +237,7 @@
   </thead>
   <tbody class="labelTd card">
     {% for product in products %}
-    <tr>
+    <tr style="width: 200px;">
       <td> <label class="labelTdDescProducto">  {{ product.title }}</label>
         <br />
         <span class="titulosStockLabel"> 
@@ -246,7 +246,7 @@
         <br />
         <span class="labelTdMedium">SKU &nbsp; {{product.id}}</span>
       </td>
-      <td>
+      <td style="width: 80px; vertical-align: middle;" > 
         <form action="/ofertasById" method="post">
             <input type="hidden" name="product-id" value="{{product.id}}">
             <input type="hidden" name="menuActualiza" value="0">
