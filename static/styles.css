@@ -1,0 +1,79 @@
+.titulosEncabezado {
+    font-size: 28px;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+}
+
+.titulos {
+    font-size: 14px;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+}
+
+.titulosStock {
+    font-size: 17px;
+}
+
+.titulosStockLabel {
+    font-size: 12px;
+    background-color: #EFF7E9;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border-radius: 2px 2px 2px 2px;
+    text-align: center;
+    color: #218343;
+}
+
+.headTr{
+    background-color: #eb54ba;
+    text-align: center;
+    color:#fff;
+}
+
+.labels {
+    font-size: 15px;
+    text-align: center;
+    color: #943d73;
+    font-weight: bold;
+}
+
+.labelTdMedium{
+    font-size: 10px;
+    text-align: left;
+    color: #000;
+}
+
+
+.labelTdDescProducto{
+    font-size: 15px;
+    text-align: center;
+    font-weight: 500;
+}
+
+
+.btnMorado {
+    background-color: #943d73;
+}
+
+.titulosBotones {
+    font-size: 16px;
+    color: #fff;
+    font-weight: bold;
+}
+
+    
+.inputsMedianos {
+    border-radius: 10px;
+    border-color: #004a77ff;
+    height: 60%;
+}
+
+.img-fluid {
+    height: 100%; /* Abarca el 100% de la altura del contenedor */
+    width: auto; /* Mantiene la proporción de la imagen */
+    object-fit: cover; /* Ajusta la imagen para que llene el espacio */
+}
