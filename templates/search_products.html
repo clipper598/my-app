@@ -73,12 +73,6 @@
     background-color: #FAE6FA;
   }
 
-  .botonesAcciones{
-    background-color: #F7CDF7;
-    color: #943D73;
-    border-radius: 2px 4px 2px;
-  }
-
   .imagen-redondeada {
     border-radius: 25px; /* Redondea las esquinas */
     width: 100px; /* Ancho de la imagen */
@@ -174,13 +168,12 @@
         <thead style="text-align: center;">
             <tr>
                 <th class="headTr centrado">Producto</th>
-                <th class="headTr centrado">Acciones</th>
             </tr>
         </thead>
         <tbody class="labelTd card">
             {% for product in products %}
             <tr>
-                <td style="width: 120px;  height: 160px; text-align: center; vertical-align: middle;">
+                <td style="width: 120px;  height: 180px; text-align: center; vertical-align: middle;">
                   
                   <img src="{{product[5]}}" class="img-fluid">
                   <br /> 
@@ -193,59 +186,41 @@
                   <span class="titulosStockLabel"> 
                     Stock: &nbsp; <label style="font-weight: bold; size: 18px;" class="titulosStock">{{product[3]}}</label>
                   </span>
+                  <div class="botones-container">  
+                              <form action="/actualizarInventario" method="post">
+                                <input type="hidden" name="id" value="{{product[0]}}">
+                                <input type="hidden" name="codigoBarras" value="{{product[1]}}">
+                                <input type="hidden" name="nombreProducto" value="{{product[2]}}">
+                                <input type="hidden" name="cantidad" value="{{product[3]}}">
+                                <input type="hidden" name="precio" value="{{product[4]}}">
+                                <input type="hidden" name="url_img_product" value="{{product[5]}}">
+                                <input type="hidden" name="menuActualiza" value="0">
+                                <button type="submit" class="btn botonesAcciones" id="update-product">
+                                  <i class="fa fa-pencil"></i>
+                                </button>
+                              </form>
+                              &nbsp;
+                              <form action="/eliminaInventario" method="post">
+                                <input type="hidden" name="id" value="{{product[0]}}">
+                                <button type="submit" class="btn botonesAcciones" id="delete-product">
+                                  <i class="fa fa-trash"></i>
+                                </button>
+                              </form>
+                              &nbsp;
+                              <form action="/ventaInventario" method="post">
+                                <input type="hidden" name="id_product" value="{{product[0]}}">
+                                <input type="hidden" name="codigoBarras" value="{{product[1]}}">
+                                <input type="hidden" name="nombreProducto" value="{{product[2]}}">
+                                <input type="hidden" name="cantidad" value="{{product[3]}}">
+                                <input type="hidden" name="precio" value="{{product[4]}}">
+                                <input type="hidden" name="menuActualiza" value="0">
+                                <button type="submit" class="btn botonesAcciones" id="sale-product">
+                                  <i class="fa fa-dollar"></i>
+                                </button>
+                              </form>
+                  </div>
                   
                 </td>
-                <td >
-                <td style="width: 60px;  height: 160px; text-align: center; vertical-align: middle;">
-
-                    <div>
-                    <br />
-                        <table>
-                            <tr>
-                                <td >
-                                    <form action="/actualizarInventario" method="post">
-                                        <input type="hidden" name="id" value="{{product[0]}}">
-                                        <input type="hidden" name="codigoBarras" value="{{product[1]}}">
-                                        <input type="hidden" name="nombreProducto" value="{{product[2]}}">
-                                        <input type="hidden" name="cantidad" value="{{product[3]}}">
-                                        <input type="hidden" name="precio" value="{{product[4]}}">
-                                        <input type="hidden" name="url_img_product" value="{{product[5]}}">
-                                        <input type="hidden" name="menuActualiza" value="0">
-                                        <button type="submit" class="btn botonesAcciones" id="update-product">
-                                            <i class="fa fa-pencil"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                    <form action="/eliminaInventario" method="post">
-                                        <input type="hidden" name="id" value="{{product[0]}}">
-                                        <button type="submit" class="btn botonesAcciones" id="delete-product">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                              </tr>
-                              <tr> 
-                                <td>
-                                  <form action="/ventaInventario" method="post">
-                                      <input type="hidden" name="id_product" value="{{product[0]}}">
-                                      <input type="hidden" name="codigoBarras" value="{{product[1]}}">
-                                      <input type="hidden" name="nombreProducto" value="{{product[2]}}">
-                                      <input type="hidden" name="cantidad" value="{{product[3]}}">
-                                      <input type="hidden" name="precio" value="{{product[4]}}">
-                                      <input type="hidden" name="menuActualiza" value="0">
-                                      <button type="submit" class="btn botonesAcciones" id="sale-product">
-                                          <i class="fa fa-dollar"></i>
-                                      </button>
-                                  </form>
-                              </td>
-                            </tr>
-                        </table>
-                    </div>
-                </td>
-            </tr>
           </tr>
             {% endfor %}
         </tbody>
