@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/html5-qrcode"></script>
@@ -21,19 +22,6 @@
       text-align: center;
       color: #004a77ff;
       font-weight: bold;
-    }
-    
-    .titulosBotones {
-      font-size: 16px;
-      color: #fff;
-      font-weight: bold;
-    }
-    
-    .inputsMedianos {
-      border-radius: 10px;
-      border-color: #004a77ff;
-      border-solid: 4px;
-      height: 60%;
     }
     
     .data {
@@ -82,12 +70,6 @@
       font-size: 23px;
     }
     
-    .titulosEncabezado {
-      font-size: 30px;
-      text-align: center;
-      color: #fff;
-      font-weight: bold;
-    }
     .titulosSubEncabezado {
       font-size: 14px;
       text-align: center;
@@ -101,14 +83,6 @@
       color: #fff;
       font-weight: bold;
     }
-    
-    .labels {
-      font-size: 16px;
-      text-align: center;
-      color: #943d73;
-      font-weight: bold;
-    }
-    
     .centrado {
       text-align: center;
     }
@@ -125,10 +99,6 @@
       background-color: #eb54ba;
     }
     
-    .btnMorado {
-      background-color: #943d73;
-    }
-    
     .btnNavegacion {
       background-color: #e733ad;
       width: 120px;
@@ -140,14 +110,14 @@
     
     .imagen-redondeada {
       border-radius: 25px; /* Redondea las esquinas */
-      width: 100px; /* Ancho de la imagen */
-      height: 80px;
+      width: 90px; /* Ancho de la imagen */
+      height: 70px;
     }
   </style>
   <body>
     <div class="panel panel-info col-sm-12" id="divFormulario">
       <div class="bgMorado centrado" style="height: 125px;">
-        <br /><br />
+        <br />
         <img src="/static/titas.jpg" class="imagen-redondeada" /> &nbsp;
         <label class="titulosEncabezado">Tita's Toys</label>
       </div>

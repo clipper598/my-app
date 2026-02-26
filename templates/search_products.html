@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-..." crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script> 
   </head>
@@ -15,25 +16,7 @@
         background-color: #fff;
         font-family: Helvetica, Arial, sans-serif;
 }
-
-.titulos {
-        font-size: 14px;
-        text-align: center;
-        color: #fff;
-        font-weight: bold;
-}
     
-.headTr{
-      background-color: #eb54ba;
-      text-align: center;
-      color:#fff;
-}
-
-.titulosBotones {
-      font-size: 14px;
-      color: #fff;
-      font-weight: bold;
-}
 
 .labelTd{
       font-size: 20px;
@@ -41,24 +24,11 @@
       color: #000;
 }
 
-.labelTdMedium{
-    font-size: 11px;
-    text-align: left;
-    color: #000;
-}
-
 .labelTdPrecio{
   font-size: 22px;
   text-align: left;
   color: #000;
   font-weight: bold;
-}
-
-.labelTdDescProducto{
-  font-size: 15px;
-  text-align: center;
-  font-weight: 500;
-
 }
 
 .labelButtonsMenu{
@@ -75,29 +45,6 @@
 
 .buttonTitle{
   font-size: 23px;
-}
-
-.titulosEncabezado {
-    font-size: 24px;
-    text-align: center;
-    color: #fff;
-    font-weight: bold;
-  }
-
-  .titulosStock {
-    font-size: 17px;
-  }
-
-.titulosStockLabel {
-  font-size: 12px;
-  background-color: #EFF7E9;
-  padding-left: 6px;
-  padding-right: 6px;
-  padding-top: 6px;
-  padding-bottom: 6px;
-  border-radius: 2px 2px 2px 2px;
-  text-align: center;
-  color: #218343;
 }
 
   .centrado{
@@ -120,10 +67,6 @@
   .btnNavegacion{
     background-color: #e733ad;
     width: 120px;
-  }
-
-  .btnMorado{
-      background-color: #943D73;
   }
 
   .divBotonesAcciones{
@@ -155,12 +98,6 @@
   background-color: white !important; /* Aplica fondo blanco a todas las filas */
 }
 
-.imgTamanioProducto{
-  width: 100%; /* Abarca el 100% del ancho del contenedor */
-  height: auto; /* Abarca el 100% de la altura del contenedor */
-  object-fit: cover; 
-}
-
 .dataTables_wrapper .dataTables_filter {
   text-align: left; /* Alinea el campo de búsqueda a la izquierda */
 }
@@ -168,12 +105,31 @@
 .dataTables_wrapper .dataTables_length {
   text-align: left; /* Alinea el selector de cantidad de filas a la izquierda */
 }
-.img-fluid {
-  height: 100%; /* Abarca el 100% de la altura del contenedor */
-  width: auto; /* Mantiene la proporción de la imagen */
-  object-fit: cover; /* Ajusta la imagen para que llene el espacio */
+
+#tblProducts {
+  border-collapse: separate;
+  border-spacing: 16px 16px;
+  width: 100%;
+  background: none;
 }
 
+#tblProducts tr {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 16px;
+  padding: 16px;
+  transition: box-shadow 0.2s;
+}
+
+#tblProducts tr:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.16);
+}
+
+#tblProducts td {
+  padding: 8px 0;
+  border: none;
+}
 </style>
 <body>
 <div class="col-sm-12">
@@ -192,7 +148,7 @@
                 <form action="/menu" method="POST">
                   <input type="hidden" name="menuNavegacion" id="menuNavegacion" value="0">
                   <button type="submit" class="btn btnMorado" id="btnMenuAlta"><i class="fa fa-cog fa-2x titulos"></i> 
-                  <label class="titulos"> Men&uacute;</label>
+                  <label class="titulosBotones"> Men&uacute;</label>
                   </button>
                 </form>
               </td>
@@ -216,31 +172,33 @@
     <div class="table-responsive">
     <table class="table table-hover display" id="tblProducts" style="width: 100%;">
         <thead style="text-align: center;">
-            <tr class="headTr centrado">
-                <th>Producto</th>
-                <th>Acciones</th>
+            <tr>
+                <th class="headTr centrado">Producto</th>
+                <th class="headTr centrado">Acciones</th>
             </tr>
         </thead>
         <tbody class="labelTd card">
             {% for product in products %}
             <tr>
-                <td style="width: 100px;  height: 140px; text-align: center; vertical-align: middle;">
+                <td style="width: 120px;  height: 160px; text-align: center; vertical-align: middle;">
                   
                   <img src="{{product[5]}}" class="img-fluid">
                   <br /> 
                   <span class="labelTdMedium"> SKU&nbsp;{{product[1]}}</span>
-                  <br /> 
+                  <br />
                   <label class="labelTdDescProducto">{{product[2]}}</label>
                   <br />
-                  <span class="titulosStockLabel"> 
-                    Stock: &nbsp; <label style="font-weight: bold; size: 20px;" class="titulosStock">{{product[3]}}</label>
-                  </span>
-                  <br />
                   <span class="labelTdPrecio">$ &nbsp; {{product[4]}}</span>
+                  <br />
+                  <span class="titulosStockLabel"> 
+                    Stock: &nbsp; <label style="font-weight: bold; size: 18px;" class="titulosStock">{{product[3]}}</label>
+                  </span>
                   
                 </td>
-                <td class="card">
-                    <div style="text-align: left">
+                <td >
+                <td style="width: 60px;  height: 160px; text-align: center; vertical-align: middle;">
+
+                    <div>
                     <br />
                         <table>
                             <tr>
@@ -288,6 +246,7 @@
                     </div>
                 </td>
             </tr>
+          </tr>
             {% endfor %}
         </tbody>
     </table>
@@ -306,7 +265,7 @@
     <script>
       $(document).ready(function() {
         $('#tblProducts').DataTable({
-            resposive:true,
+            responsive:true,
             stripeClasses: [],
             paging: true,        // Habilita la paginación
             searching: true,     // Habilita el filtro de búsqueda
