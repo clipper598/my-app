@@ -42,7 +42,7 @@
 }
 
 .labelTdMedium{
-    font-size: 10px;
+    font-size: 9px;
     text-align: left;
     color: #000;
 }
@@ -77,3 +77,19 @@
     width: auto; /* Mantiene la proporción de la imagen */
     object-fit: cover; /* Ajusta la imagen para que llene el espacio */
 }
+
+.botones-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px; /* Espacio entre botones */
+}
+.botones-container form {
+    margin: 0;
+}
+
+.botonesAcciones{
+    background-color: #F7CDF7;
+    color: #943D73;
+    border-radius: 2px 4px 2px;
+  }
