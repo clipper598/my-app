@@ -1,9 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for, jsonify, session
 import requests
 from datetime import  datetime
 from configDb import *
 app =  Flask(__name__)
-
+app.secret_key = 'CLIPPER5983**'
 
 # Tu API key de PricesAPI
 API_KEY = "pricesapi_UqgptyPtRfonJsOJMj4FHcPbBjW1Al"  # <--- reemplaza con tu clave real
@@ -88,8 +88,8 @@ def actualizarInventario():
             finally:
                 cursor.close()
             conexion_MySQLdb.close()
-            return render_template('edit_products.html', id = id, barcode = barcode, price = price, quantity = quantity, product_name = product_name, descAct=descAct, url_img_product= url_img_product);
-                     
+            #return render_template('edit_products.html', id = id, barcode = barcode, price = price, quantity = quantity, product_name = product_name, descAct=descAct, url_img_product= url_img_product);
+            return redirect("/consultaInventario");       
     else:
         return redirect("/consultaInventario"); 
 
@@ -325,5 +325,46 @@ def obtener_ofertasById():
                         "delivery_info": item["delivery_info"]
                     })
             # Ordenar por el precio más barato (ascendente)
-            filtered_offers = sorted(filtered_offers, key=lambda x: x["price"])           
+            filtered_offers = sorted(filtered_offers, key=lambda x: x["price"])         
             return render_template('search_offersById.html', offers=filtered_offers)
+        
+
+#vistaPara ventas
+@app.route('/ventasProductos',methods=['GET', 'POST'])
+def ventasProductos():
+    #print(request.form);
+    products = []
+    conexion_MySQLdb = conectionDB()
+        
+    cursor = conexion_MySQLdb.cursor()
+    try:
+        cursor.execute("SELECT id, barcode, product_name, quantity, price, url_img_product  FROM products order by product_name asc")
+        products = cursor.fetchall()
+        #print(products)
+    finally:
+        cursor.close()
+    conexion_MySQLdb.close()
+      
+    return render_template('search_products_sales.html', products = products);
+
+@app.route('/agregar_carrito', methods=['POST'])
+def agregar_carrito():
+    producto = {
+        'id': request.form['id_product']
+    }
+    carrito = session.get('carrito', [])
+    carrito.append(producto)
+    session['carrito'] = carrito
+    products = obtener_productos()
+    return render_template('search_products_sales.html', products=products)
+
+def obtener_productos():
+    conexion_MySQLdb = conectionDB()
+    cursor = conexion_MySQLdb.cursor()
+    try:
+        cursor.execute("SELECT id, barcode, product_name, quantity, price, url_img_product FROM products ORDER BY product_name ASC")
+        products = cursor.fetchall()
+    finally:
+        cursor.close()
+    conexion_MySQLdb.close()
+    return products
