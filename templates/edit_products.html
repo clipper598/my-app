@@ -8,6 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
   </head>
   <style>
     body {
@@ -147,14 +148,14 @@ text-align: center;
       <div class="panel-body">
         <label class="labels"><h3> Actualizar Producto</h3></label>
         <br />
-        <div style="display: none;">
-          <label> <h3 class="text-success"> {{descAct}} <h3/> <label/>
-        </div>
-      <div class="col-sm-2"></div>
+          <div style="display: none;">
+                <label> <h3 class="text-success"> {{descAct}} <h3/> <label/>
+          </div>
+      <div class="col-sm-2">&nbsp;</div>
       <!-- Formulario para entrada de datos -->
       <div class="panel panel-info  col-sm-8">
+      
         <form action="/actualizarInventario" method="post">
-         
         <input type="hidden"  class="form-control data inputsMedianos" id="id" name="id" required value="{{id}}" readonly/>
         <!-- Código de barras -->
         <label for="barcode" class="labels"><h4>Código de barras:</h4></label>
@@ -182,18 +183,35 @@ text-align: center;
             <br />
         <!-- Botón para actualizar -->
         <div style="text-align: right;">
-          <button type="submit" class="btn btnMorado titulosBotones"> 
-            <input type="hidden" name="menuActualiza" value="1">
-            <i class="fa fa-check" aria-hidden="true"></i> &nbsp; Actualizar
-          </button>
-        </div>
-        <br /><br />
-      </form>
-      <br /><br />
-    </div>
-    <div class="col-sm-2"></div>
 
+          <table>
+            <tr>
+              <td>
+                
+                  <button type="submit" class="btn btnSucccess titulosBotones"> 
+                    <input type="hidden" name="menuActualiza" value="1">
+                    <i class="fa fa-check" aria-hidden="true"></i> &nbsp; Actualizar
+                  </button>
+               </form>
+              </td>
+              <td>
+              &nbsp;&nbsp;
+              </td>
+              <td>
+                <form action="/eliminaInventario" method="post">
+                  <input type="hidden" name="id" value="{{id}}">
+                  <button type="submit" class="btn btnDelete  titulosBotones" id="delete-product">
+                  <i class="fa fa-trash"></i> &nbsp; Eliminar
+                  </button>
+              </form>
+              </td>
+            </tr>
+           </tbody>
+          </table>
+          <br /><br />
+        </div>
     </div>
+    <div class="col-sm-2">&nbsp;</div>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
           const descAct = "{{descAct}}"; // Obtiene el valor de la variable

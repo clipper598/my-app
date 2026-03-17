@@ -121,6 +121,34 @@
   border: none;
 }
 </style>
+
+<style>
+  #tblProducts tr {
+    position: relative;
+    transition: transform 0.3s;
+    background: #fff;
+  }
+  #tblProducts tr.show-delete {
+    transform: translateX(-100px);
+  }
+  .delete-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: red;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    display: none;
+    z-index: 2;
+    cursor: pointer;
+  }
+  #tblProducts tr.show-delete .delete-btn {
+    display: block;
+  }
+</style>
 <body>
 <div class="col-sm-12">
   <div>
@@ -195,13 +223,14 @@
                                   <i class="fa fa-pencil"></i>
                                 </button>
                               </form>
+                               <!--
                               &nbsp;
                               <form action="/eliminaInventario" method="post">
                                 <input type="hidden" name="id" value="{{product[0]}}">
                                 <button type="submit" class="btn botonesAcciones" id="delete-product">
                                   <i class="fa fa-trash"></i>
                                 </button>
-                              </form>
+                              </form>-->
                               &nbsp;
                               <form action="/ventaInventario" method="post">
                                 <input type="hidden" name="id_product" value="{{product[0]}}">
@@ -259,5 +288,37 @@
         });
     });
   </script>
+
+  <script>
+    document.querySelectorAll('#tblProducts tr').forEach(function(row, idx) {
+      if (idx === 0) return; // omitir encabezado
+      let startX = 0;
+      row.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+      });
+      row.addEventListener('touchend', function(e) {
+        let endX = e.changedTouches[0].clientX;
+        if (startX - endX > 50) { // deslizó a la izquierda
+          row.classList.add('show-delete');
+        }
+      });
+      // Botón eliminar
+      let btn = document.createElement('button');
+      btn.textContent = 'Eliminar';
+      btn.className = 'delete-btn';
+      btn.onclick = function(ev) {
+        ev.stopPropagation();
+        row.remove();
+        // Aquí puedes agregar tu fetch('/eliminaInventario', ...) si lo necesitas
+      };
+      row.appendChild(btn);
+      // Ocultar el botón si se toca fuera
+      document.body.addEventListener('touchstart', function(e) {
+        if (!row.contains(e.target)) {
+          row.classList.remove('show-delete');
+        }
+      });
+    });
+    </script>
   </body>
 </html>
